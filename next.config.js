@@ -9,15 +9,12 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 module.exports = withBundleAnalyzer({
 	compress: true,
 	distDir: 'build',
-	webpack(config) {
+	webpack(config, { webpack }) {
 		const prod = process.env.NODE_ENV === 'production';
 		const { module = {}, plugins = [] } = config;
-		// if (prod) {
-		// }
-		return {
+		const newConfig = {
 			...config,
 			mode: prod ? 'production' : 'development',
-			devtool: prod ? 'hidden-source-map' : 'eval',
 			output: {
 				...config.output,
 				publicPath: '/_next/',
@@ -47,12 +44,15 @@ module.exports = withBundleAnalyzer({
 			},
 			plugins: [
 				...plugins,
-				new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /^\.\/ko$/),
 				new webpack.DefinePlugin({
 					'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 				}),
 				new Dotenv({ silent: true }),
 			],
-		};
+		}
+		if (prod) {
+			newConfig.devtool = 'hidden-source-map';
+		}
+		return newConfig;
 	},
 });
