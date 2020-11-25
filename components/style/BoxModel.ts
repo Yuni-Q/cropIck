@@ -1,19 +1,22 @@
-export const BoxModel = (sizePrefix = ''): string => {
-	return `
+import { css, FlattenSimpleInterpolation } from "styled-components";
+import { CG200 } from "./Color";
+
+export const BoxModel = (sizePrefix = ''): FlattenSimpleInterpolation => {
+	return css`
     .border${sizePrefix} {
-      border: 1px solid $CG200 !important;
+      border: 1px solid ${CG200} !important;
     }
     .border-top${sizePrefix} {
-      border-top: 1px solid $CG200 !important;
+      border-top: 1px solid ${CG200} !important;
     }
     .border-right${sizePrefix} {
-      border-right: 1px solid $CG200 !important;
+      border-right: 1px solid ${CG200} !important;
     }
     .border-bottom${sizePrefix} {
-      border-bottom: 1px solid $CG200 !important;
+      border-bottom: 1px solid ${CG200} !important;
     }
     .border-left${sizePrefix} {
-      border-left: 1px solid $CG200 !important;
+      border-left: 1px solid ${CG200} !important;
     }
 
     .border${sizePrefix}-0 {
@@ -203,63 +206,63 @@ export const BoxModel = (sizePrefix = ''): string => {
 };
 
 export const MarginAndPadding = (sizePrefix = ''): string => {
-	const arr = Array(14).fill(1);
+	const arr = Array(40).fill(1);
 	return arr.reduce((previousValue, _, currentIndex) => {
 		const index = currentIndex - 1;
-		return `
+		return css`
       ${previousValue}
       
       .m${sizePrefix}-${index} {
-        margin: ${index * 8}px !important;
+        margin: ${index * 4}px !important;
       }
       .mt${sizePrefix}-${index} {
-        margin-top: ${index * 8}px !important;
+        margin-top: ${index * 4}px !important;
       }
       .mr${sizePrefix}-${index} {
-        margin-right: ${index * 8}px !important;
+        margin-right: ${index * 4}px !important;
       }
       .mb${sizePrefix}-${index} {
-        margin-bottom: ${index * 8}px !important;
+        margin-bottom: ${index * 4}px !important;
       }
       .ml${sizePrefix}-${index} {
-        margin-left: ${index * 8}px !important;
+        margin-left: ${index * 4}px !important;
       }
       .mx${sizePrefix}-${index} {
-        margin-left: ${index * 8}px !important;
-        margin-right: ${index * 8}px !important;
+        margin-left: ${index * 4}px !important;
+        margin-right: ${index * 4}px !important;
       }
       .my${sizePrefix}-${index} {
-        margin-top: ${index * 8}px !important;
-        margin-bottom: ${index * 8}px !important;
+        margin-top: ${index * 4}px !important;
+        margin-bottom: ${index * 4}px !important;
       }
       .m${sizePrefix}-m-${index} {
-        margin: ${index * -8}px !important;
+        margin: ${index * -4}px !important;
       }
       .mt${sizePrefix}-m-${index} {
-        margin-top: ${index * -8}px !important;
+        margin-top: ${index * -4}px !important;
       }
       .mr${sizePrefix}-m-${index} {
-        margin-right: ${index * -8}px !important;
+        margin-right: ${index * -4}px !important;
       }
       .mb${sizePrefix}-m-${index} {
-        margin-bottom: ${index * -8}px !important;
+        margin-bottom: ${index * -4}px !important;
       }
       .ml${sizePrefix}-m-${index} {
-        margin-left: ${index * -8}px !important;
+        margin-left: ${index * -4}px !important;
       }
       .mx${sizePrefix}-m-${index} {
-        margin-left: ${index * -8}px !important;
-        margin-right: ${index * -8}px !important;
+        margin-left: ${index * -4}px !important;
+        margin-right: ${index * -4}px !important;
       }
       .my${sizePrefix}-m-${index} {
-        margin-top: ${index * -8}px !important;
-        margin-bottom: ${index * -8}px !important;
+        margin-top: ${index * -4}px !important;
+        margin-bottom: ${index * -4}px !important;
       }
     `;
 	}, '');
 };
 
-export const Half = `
+export const Half = css`
   .m-half {
     margin: 4px;
   }

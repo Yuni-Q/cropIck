@@ -1,66 +1,47 @@
+import { ServerResponse } from 'http';
+import { NextComponentType, NextPageContext } from 'next';
 import App from 'next/app';
+import Head from 'next/head';
 import Router from 'next/router';
 import React from 'react';
-import Helmet from 'react-helmet';
-import GlobalStyle from '../components/GlobalStyle';
-import wrapper from '../store/configureStore';
+import Loading from '../components/Loading';
+import GlobalStyle from '../components/style/GlobalStyle';
 import { log } from '../utils/log';
+import wrapper from '../store/configureStore';
 
-Router.events.on('routeChangeStart', () => {
-	console.log('routeChangeStart');
+
+Router.events.on('routeChangeStart', (url: string) => {
+	log('routeChangeStart');
+	log(`Loading: ${url}`)
 });
+
+Router.events.on('beforeHistoryChange', () => {
+	log('beforeHistoryChange');
+});
+
 Router.events.on('routeChangeComplete', () => {
-	console.log('routeChangeComplete');
+	log('routeChangeComplete');
 });
 
-class MyApp extends App<Props, any> {
-	componentDidMount() {
-		if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-			navigator.serviceWorker
-				.register('/service-worker.js')
-				.then((result) => {
-					log('service worker registration successful', result);
-				})
-				.catch((err) => {
-					log('service worker registration failed', err.message);
-				});
-		}
-	}
+Router.events.on('routeChangeError', () => {
+	log('routeChangeError');
+})
 
-	render() {
+interface Props {
+	Component: NextComponentType<NextPageContext>;
+	pageProps: PageContext;
+}
+
+class MyApp extends App<Props> {
+	render(): JSX.Element {
 		const { Component, pageProps = {} } = this.props;
 		return (
 			<>
-				<Helmet
-					title="yuni-q"
-					htmlAttributes={{ lang: 'ko-KO' }}
-					meta={[
-						{
-							name: 'viewport',
-							content:
-								'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover',
-						},
-						// {
-						//   'http-equiv': 'X-UA-Compatible',
-						//   content: 'IE=edge',
-						// },
-						{
-							name: 'description',
-							content: 'yuni-q',
-						},
-						{
-							property: 'og:type',
-							content: 'website',
-						},
-					]}
-					link={[
-						{
-							rel: 'shortcut icon',
-							href: '',
-						},
-					]}
-				/>
+				<Head>
+					<title>yuni-q</title>
+				</Head>
 				<GlobalStyle />
+				<Loading />
 				<Component {...pageProps} />
 			</>
 		);
@@ -69,27 +50,30 @@ class MyApp extends App<Props, any> {
 
 MyApp.getInitialProps = async (context) => {
 	const { res } = context.ctx;
+
 	const isServer = !!context.ctx.req;
 	if (isServer) {
-		log(isServer);
+		log('isServer', isServer);
 	} else {
-		log(isServer);
+		log('isNotServer', isServer);
 	}
-	let pageProps: any = {};
+
+	let pageProps = {} as PageContext;
 	if (context.Component.getInitialProps) {
 		const { ctx } = context;
-		const obj: any = {
+		const obj: { ctx: NextPageContext; res: ServerResponse | undefined } = {
 			ctx,
 			res,
 		};
-		pageProps = await context.Component.getInitialProps(obj);
+		pageProps = await context.Component.getInitialProps(obj as unknown as NextPageContext) as PageContext;
 	}
 	return { pageProps, isServer };
 };
 
-interface Props {
-	Component: any;
-	pageProps: any;
+export interface PageContext extends NextPageContext {
+	params: {
+		id?: string
+	};
 }
 
 export default wrapper.withRedux(MyApp);

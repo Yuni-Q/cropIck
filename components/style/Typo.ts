@@ -1,6 +1,7 @@
+import { css } from 'styled-components';
 import { frameMaxWidthXsmall, frameMaxWidthSmall } from './Layout';
 
-const Typo = `
+const Typo = css`
 	h1,
 	.h1,
 	h2,
@@ -35,7 +36,6 @@ const Typo = `
 		letter-spacing: -1.2px;
 	}
 
-	h3,
 	.h3 {
 		font-size: 22px;
 		line-height: 32px;
@@ -288,6 +288,10 @@ const Typo = `
 		display: inline;
 		padding: 0;
 		margin: 0;
+	}
+
+	.position-absolute {
+		position: absolute;
 	}
 
 	.text-ellipsis {

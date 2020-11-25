@@ -8,6 +8,15 @@ const GlobalStyle = createGlobalStyle`
   ${Color}
   ${Typo}
   ${Half}
+  
+  *:focus {
+    outline: none;
+  }
+
+  a {
+    color: rgb(241, 219, 205);
+    text-decoration-line: none;
+  }
 
   ${MarginAndPadding()}
   ${BoxModel()}
