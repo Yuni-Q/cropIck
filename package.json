@@ -4,16 +4,18 @@
 	"main": "server.js",
 	"scripts": {
 		"dev": "nodemon",
-		"build": "ANALYZE=true NODE_ENV=production next build",
-		"start": "NODE_ENV=production node server.js",
-		"predeloy": "npm run build",
-		"deploy": "git pull && npm install && pm2 start ecosystem.config.js --env production",
+		"build": "ANALYZE=false NODE_ENV=production next build",
+		"start": "ANALYZE=false NODE_ENV=production node -r esm -r ts-node/register ./server.local.ts",
+		"predeloy": "git pull && npm install && npm run build",
+		"deploy": "NODE_ENV=production pm2 start ts-node -- -P tsconfig.server.json ./server.local.ts",
 		"export": "npm run build && next export",
 		"type-check": "tsc",
 		"lint": "concurrently \"npm run lint:ts\" \"npm run lint:style\"",
-		"lint:es": "eslint \"./pages/**/*.{ts,tsx,js,jsx}\" --fix",
+		"lint:es": "eslint --ext .ts --ext .tsx . --fix --quiet",
 		"lint:style": "stylelint \"./**/*.{scss,css}\" --fix",
-		"prettier": "prettier --write --config ./.prettierrc './**/*.{ts,tsx}'"
+		"prettier": "prettier --write --config ./.prettierrc './**/*.{ts,tsx}'",
+		"make:token": "web-push generate-vapid-keys",
+		"watch": "jest --watchAll"
 	},
 	"dependencies": {
 		"@ant-design/icons": "^4.2.1",
@@ -50,6 +52,9 @@
 	},
 	"devDependencies": {
 		"@next/bundle-analyzer": "^9.4.4",
+		"@testing-library/jest-dom": "^5.11.6",
+		"@testing-library/react": "^11.2.2",
+		"@types/jest-plugin-context": "^2.9.4",
 		"@types/node": "^12.7.8",
 		"@types/react": "^16.9.3",
 		"@types/react-dom": "^16.9.1",
@@ -67,6 +72,8 @@
 		"eslint-plugin-react": "^7.20.3",
 		"eslint-plugin-react-hooks": "^4.0.5",
 		"husky": "^4.2.5",
+		"jest": "^26.6.3",
+		"jest-plugin-context": "^2.9.0",
 		"lint-staged": "^10.2.11",
 		"nodemon": "^2.0.2",
 		"prettier": "^2.0.5",
