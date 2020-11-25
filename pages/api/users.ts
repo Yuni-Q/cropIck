@@ -1,4 +1,6 @@
-export default (req: any, res: any) => {
+import { NextApiRequest, NextApiResponse } from "next";
+
+export default (req: NextApiRequest, res: NextApiResponse) => {
 	if (req.method === 'POST') {
 		// Process a POST request
 	}
