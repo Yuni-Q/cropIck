@@ -5,8 +5,8 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import {Store} from 'redux';
 import {END} from 'redux-saga';
-import {loadUser} from '../../actions';
-import wrapper from '../../store/configureStore';
+import {loadUser} from '../actions';
+import wrapper from '../store/configureStore';
 
 interface SageStore extends Store {
 	sagaTask: {
