@@ -5,6 +5,12 @@ export default (): string => {
 };
 
 export const redirectRoot = (res?: ServerResponse): void => {
+    // return {
+    //     redirect: {
+    //         destination: '/',
+    //         permanent: false,
+    //     }
+    // }
     const path = '/'
     if(res) {
         res.setHeader('location', path);
