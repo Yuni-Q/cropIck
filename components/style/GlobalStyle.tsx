@@ -13,11 +13,6 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 
-  a {
-    color: rgb(241, 219, 205);
-    text-decoration-line: none;
-  }
-
   ${MarginAndPadding()}
   ${BoxModel()}
   @media (max-width: ${frameMaxWidthSmall}) {
