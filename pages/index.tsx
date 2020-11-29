@@ -1,53 +1,40 @@
-import Axios from 'axios';
-import {NextPage} from 'next';
+import { NextPage } from 'next';
 import Link from 'next/link';
 import React from 'react';
-import {useSelector} from 'react-redux';
-import {Store} from 'redux';
-import {END} from 'redux-saga';
-import {loadUser} from '../actions';
-import wrapper from '../store/configureStore';
-
-interface SageStore extends Store {
-	sagaTask: {
-		toPromise: () => void;
-	};
-}
+import { PageContext } from './_app';
+import styled from 'styled-components';
+import GNB from '../components/GNB';
 
 interface Props {
 	data: number;
 }
 
 const Main: NextPage<Props> = ({ data }) => {
-	const user = useSelector((state: any) => state.user);
 	return (
-		<>
-			<h1>{process.env.APP_NAME || ".env 파일을 만들고 APP_NAME을 설정하세요"}</h1>
-			<div className='m-1'>{user.me.name} {data}</div>
-			<div className='m-sm-2'>{user.me.name} {data}</div>
-			<div>
-				<Link href="/posts/[id]" as="/posts/1">
-					<a>
-						posts로 이동
-					</a>
-				</Link>
-			</div>
-		</>
+		<StyledWrapper>
+			<GNB />
+		</StyledWrapper>
 	);
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
-	const cookie = context.req ? context.req.headers.cookie : '';
-	Axios.defaults.headers.Cookie = '';
-	if (context.req && cookie) {
-		Axios.defaults.headers.Cookie = cookie;
-	}
 
-	context.store.dispatch(loadUser(1));
-	context.store.dispatch(END);
-	/* eslint-disable */
-	await (context.store as SageStore).sagaTask.toPromise();
-	/* eslint-enable */
-	return { props: { data: 123 } }
-});
+interface ServerSideProps {
+	props: {
+		data: number;
+	}
+}
+
+export const getServerSideProps = async ({req, res}: PageContext): Promise<ServerSideProps | void> => {
+	console.log(req, res);
+	return {
+		props: {
+			data: 123,
+		}
+	}
+};
+
 export default Main;
+
+const StyledWrapper = styled.div`
+	max-width: 1440px;
+`;

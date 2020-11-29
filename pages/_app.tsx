@@ -7,7 +7,6 @@ import React from 'react';
 import Loading from '../components/Loading';
 import GlobalStyle from '../components/style/GlobalStyle';
 import { log } from '../utils/log';
-import wrapper from '../store/configureStore';
 
 
 Router.events.on('routeChangeStart', (url: string) => {
@@ -76,4 +75,4 @@ export interface PageContext extends NextPageContext {
 	};
 }
 
-export default wrapper.withRedux(MyApp);
+export default MyApp;

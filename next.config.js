@@ -1,12 +1,8 @@
 /* eslint-disable */
-const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-	enabled: process.env.ANALYZE === 'true',
-});
 /* eslint-enable */
 
-module.exports = withBundleAnalyzer({
+module.exports = {
 	compress: true,
 	distDir: 'build',
 	webpack(config, { webpack }) {
@@ -55,4 +51,4 @@ module.exports = withBundleAnalyzer({
 		}
 		return newConfig;
 	},
-});
+};
