@@ -5,7 +5,9 @@ import styled from 'styled-components';
 const GNB: React.FC = () => {
   return (
     <StyledGNBWrapper>
+      <a href="/">
       <StyledCropIckButton>CROP_ICK</StyledCropIckButton>
+      </a>
       <StyledNav>
         <Link href="/">검색</Link>
         <Link href="/community">커뮤니티</Link>
