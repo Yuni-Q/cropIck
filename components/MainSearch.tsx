@@ -7,6 +7,7 @@ const MainSearch: React.FC = () => {
   const [category, setCategory]  = useState(Category.PLACE)
   const [sido, setSido] = useState('');
   const [gugun, setGugun] = useState('');
+  const [crop, setCrop] = useState('');
   return (
     <StyledWrapper>
       <div>
@@ -23,7 +24,7 @@ const MainSearch: React.FC = () => {
           <StyledNavButton inable={category===Category.CROPS} onClick={() => setCategory(Category.CROPS)}>작물로 검색</StyledNavButton>
         </StyledSearchNavWrapper>
         <StyledCategoryWrapper>
-        <select value={sido} onChange={(e) => setSido(e.target.value)}>
+        {category===Category.PLACE && <><select value={sido} onChange={(e) => setSido(e.target.value)}>
 				  <option value="" disabled>시/도</option>
 				  <option value="서울시">서울시</option>
 				  <option value="대구시">대구시</option>
@@ -32,7 +33,10 @@ const MainSearch: React.FC = () => {
 				  <option value="" disabled>구</option>
 				  <option value="북구">북구</option>
 				  <option value="동구">동구</option>
-			  </select>
+			  </select></>}
+        {category===Category.CROPS&& <>
+        <input placeholder="작물명 ex) 딸기" type="text" value={crop} onChange={(e)=> setCrop(e.target.value)} />
+        </>}
         </StyledCategoryWrapper>
         <div>
         <StyledButton><a>검색하기</a></StyledButton>
@@ -138,12 +142,24 @@ const StyledButton = styled.button`
 `;
 
 const StyledCategoryWrapper = styled.div`
-select {
-  width: 200px;
-  margin: 30px 20px 30px 0;
-  border-radius: 3px;
-  box-shadow: 1px 1px 3px 0 rgba(32, 72, 20, 0.1);
-  border: solid 1px #d2d5d1;
-  background-color: #ffffff;
-}
+  select {
+    width: 200px;
+    margin: 30px 20px 30px 0;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px 0 rgba(32, 72, 20, 0.1);
+    border: solid 1px #d2d5d1;
+    background-color: #ffffff;
+  }
+  input {
+    width: 420px;
+    height: 42px;
+    padding: 11px 81px 11px 12px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 3px 0 rgba(32, 72, 20, 0.1);
+    border: solid 1px #d2d5d1;
+    background-color: #ffffff;
+    font-family: NotoSansKR;
+    font-size: 14px;
+  }
+
 `;
