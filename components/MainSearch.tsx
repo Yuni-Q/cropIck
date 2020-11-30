@@ -122,7 +122,7 @@ const StyledNavButton = styled.button<{inable: boolean}>`
   }}
 `;
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
   width: 420px;
   height: 42px;
   margin: 30px 0 70px 0;
@@ -141,7 +141,7 @@ const StyledButton = styled.button`
   }
 `;
 
-const StyledCategoryWrapper = styled.div`
+export const StyledCategoryWrapper = styled.div`
   select {
     width: 200px;
     margin: 30px 20px 30px 0;
@@ -152,7 +152,6 @@ const StyledCategoryWrapper = styled.div`
   }
   input {
     width: 420px;
-    height: 42px;
     padding: 11px 81px 11px 12px;
     border-radius: 3px;
     box-shadow: 1px 1px 3px 0 rgba(32, 72, 20, 0.1);

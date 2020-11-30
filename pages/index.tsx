@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import GNB from '../components/GNB';
@@ -16,6 +16,7 @@ export enum Category {
 }
 
 const Main: NextPage = () => {
+	const [content, setContent] = useState([1, 2, 3, 4, 5,6,7,8,9,10,11,12,13,14]);
 	
 	return (
 		<StyledWrapper>
@@ -31,7 +32,7 @@ const Main: NextPage = () => {
 				<NewCommunity />
 			</StyledSecondSection>
 			</SectionWrapper>
-			<PopularCommunityContent />
+			<PopularCommunityContent content={content} />
 			<Footer />
 		</StyledWrapper>
 	);
@@ -39,20 +40,20 @@ const Main: NextPage = () => {
 
 export default Main;
 
-const StyledWrapper = styled.div`
+export const StyledWrapper = styled.div`
 	max-width: 1440px;
 	margin: 0 auto;
 `;
 
-const SectionWrapper = styled.section`
+export const SectionWrapper = styled.section`
 	display: flex;
 `;
 
-const StyledFirstSection = styled.section`
+export const StyledFirstSection = styled.section`
 	width: 791px;
 	border-right: 1px solid #e5e7e5; 
 `;
 
-const StyledSecondSection = styled.section`
+export const StyledSecondSection = styled.section`
 	margin: 0 0 0 40px;
 `

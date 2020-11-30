@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Title, TitleWrapper } from './PopularCommunity';
 
-const PopularCommunityContent: React.FC = () => {
+const PopularCommunityContent: React.FC<{content: number[]}> = ({content}) => {
   return (
     <PopularCommunityContentWrapper>
       <TitleWrapper>
@@ -10,7 +10,7 @@ const PopularCommunityContent: React.FC = () => {
       </TitleWrapper>
       <RankingWrapper>
         <RankingSection>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(no => {
+          {content.map(no => {
             return (
               <RankSection key={no}>
                 <No>사과 커뮤니티</No>
@@ -33,7 +33,6 @@ export default PopularCommunityContent;
 
 const PopularCommunityContentWrapper = styled.section`
 	max-width: 1440px;
-  margin: 30px 0 0 0;
 `;
 
 const RankingWrapper = styled.div`
@@ -47,7 +46,7 @@ const RankingSection = styled.div`
 `;
 
 const RankSection = styled.div`
-  width: 250px;
+  width: 230px;
   margin: 0 14px 4px 0;
   padding: 9px 48px 9px 12px;
   border-radius: 3px;
