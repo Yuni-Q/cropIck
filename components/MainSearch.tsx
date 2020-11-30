@@ -1,8 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
+import { Category } from '../pages';
 import imgMain from '../static/images/img-main@2x.png';
 
 const MainSearch: React.FC = () => {
+  const [category, setCategory]  = useState(Category.PLACE)
+  const [sido, setSido] = useState('');
+  const [gugun, setGugun] = useState('');
   return (
     <StyledWrapper>
       <div>
@@ -15,19 +19,19 @@ const MainSearch: React.FC = () => {
           나의 작물을 선택해보세요 :)
         </StyledTitle>
         <StyledSearchNavWrapper>
-        <div>장소로 검색</div>
-        <div>작물로 검색</div>
+          <StyledNavButton inable={category===Category.PLACE} onClick={() => setCategory(Category.PLACE)}>장소로 검색</StyledNavButton>
+          <StyledNavButton inable={category===Category.CROPS} onClick={() => setCategory(Category.CROPS)}>작물로 검색</StyledNavButton>
         </StyledSearchNavWrapper>
         <StyledCategoryWrapper>
-        <select >
-				  <option value="test1">시/도</option>
-				  <option value="test2">서울시</option>
-				  <option value="test3">대구시</option>
+        <select value={sido} onChange={(e) => setSido(e.target.value)}>
+				  <option value="" disabled>시/도</option>
+				  <option value="서울시">서울시</option>
+				  <option value="대구시">대구시</option>
 			  </select>
-        <select >
-				  <option value="test1">구</option>
-				  <option value="test2">북구</option>
-				  <option value="test3">동구</option>
+        <select value={gugun} onChange={(e) => setGugun(e.target.value)}>
+				  <option value="" disabled>구</option>
+				  <option value="북구">북구</option>
+				  <option value="동구">동구</option>
 			  </select>
         </StyledCategoryWrapper>
         <div>
@@ -79,14 +83,40 @@ const StyledTitle = styled.div`
 
 const StyledSearchNavWrapper = styled.div`
   display: flex;
-  margin: 60px 671px 2px 20px;
-  div {
-    width: 108px;
-    font-family: NotoSansKR;
-    font-size: 20px;
-    line-height: 2.9;
-    color: #898c88;
-  }
+  margin: 60px 671px 2px 0;  
+`;
+
+const StyledNavButton = styled.button<{inable: boolean}>`
+  ${({inable}) => {
+    if(!!inable) {
+      return css`
+        position: relative;
+        width: 108px;
+        font-family: NotoSansKR;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 1.8;
+        color: #111111;
+        &::after {
+          content: "";
+          display: inline-block;
+          width: 90%;
+          height: 2px;
+          position: absolute;
+          left: 8px;
+          bottom: 12px;
+          background: #3da11e;
+        }
+      `;
+    }
+    return css`
+      width: 108px;
+      font-family: NotoSansKR;
+      font-size: 20px;
+      line-height: 2.9;
+      color: #898c88;  
+    `
+  }}
 `;
 
 const StyledButton = styled.button`

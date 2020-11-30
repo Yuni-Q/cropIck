@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { PageContext } from './_app';
 import styled from 'styled-components';
 import GNB from '../components/GNB';
@@ -10,7 +10,13 @@ interface Props {
 	data: number;
 }
 
+export enum Category {
+	PLACE,
+	CROPS,
+}
+
 const Main: NextPage<Props> = ({ data }) => {
+	
 	return (
 		<StyledWrapper>
 			<GNB />
