@@ -62,7 +62,7 @@ const StyledImg = styled.img`
 const StyledSubTitle = styled.div`
   width: 258px;
   height: 28px;
-  margin: 65px 649px 6px 0;
+  margin: 65px 0 6px 0;
   font-family: Gotham;
   font-size: 24px;
   font-weight: 500;
@@ -73,7 +73,7 @@ const StyledSubTitle = styled.div`
 const StyledTitle = styled.div`
   width: 500px;
   height: 174px;
-  margin: 6px 407px 60px 0;
+  margin: 6px 0 60px 0;
   font-family: NotoSansKR;
   font-size: 38px;
   font-weight: bold;
@@ -83,7 +83,7 @@ const StyledTitle = styled.div`
 
 const StyledSearchNavWrapper = styled.div`
   display: flex;
-  margin: 60px 671px 2px 0;  
+  margin: 60px 0 2px 0;  
 `;
 
 const StyledNavButton = styled.button<{inable: boolean}>`
@@ -122,7 +122,7 @@ const StyledNavButton = styled.button<{inable: boolean}>`
 const StyledButton = styled.button`
   width: 420px;
   height: 42px;
-  margin: 30px 487px 70px 0;
+  margin: 30px 0 70px 0;
   padding: 11px 51px 11px 48px;
   border-radius: 3px;
   box-shadow: 1px 1px 4px 0 rgba(17, 17, 17, 0.2);
