@@ -8,7 +8,7 @@ const GNB: React.FC = () => {
       <StyledCropIckButton>CROP_ICK</StyledCropIckButton>
       <StyledNav>
         <Link href="/">검색</Link>
-        <Link href="/">커뮤니티</Link>
+        <Link href="/community">커뮤니티</Link>
       </StyledNav>
     </StyledGNBWrapper>
   )
