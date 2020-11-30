@@ -48,14 +48,13 @@ export default MainSearch;
 
 const StyledWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
 `;
 
 const StyledImg = styled.img`
   width: 533px;
   height: 579px;
-  margin: 0 0 0 407px;
+  margin: 0 0 0 270px;
   object-fit: contain;
 `;
 

@@ -77,17 +77,3 @@ const Content = styled.div`
   font-size: 14px;
   color: #111111;
 `;
-
-const NewsContent = styled.div`
-  width: 230px;
-  white-space: normal;
-	line-height: 1.43;
-	height: 5.72em;
-	text-align: left;
-	word-wrap: break-word;
-	display: -webkit-box;
-	-webkit-line-clamp: 4;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-	word-break: break-all;
-`;

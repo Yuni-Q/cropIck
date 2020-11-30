@@ -1,11 +1,13 @@
 import { NextPage } from 'next';
 import React from 'react';
 import styled from 'styled-components';
+import Footer from '../components/Footer';
 import GNB from '../components/GNB';
 import MainSearch from '../components/MainSearch';
 import NewCommunity from '../components/NewCommunity';
 import News from '../components/News';
 import PopularCommunity from '../components/PopularCommunity';
+import PopularCommunityContent from '../components/PopularCommunityContent';
 import Rank from '../components/Rank';
 import { PageContext } from './_app';
 
@@ -34,6 +36,8 @@ const Main: NextPage<Props> = ({ data }) => {
 				<NewCommunity />
 			</StyledSecondSection>
 			</SectionWrapper>
+			<PopularCommunityContent />
+			<Footer />
 		</StyledWrapper>
 	);
 };
