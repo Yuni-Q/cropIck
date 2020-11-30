@@ -16,7 +16,7 @@ export enum Category {
 }
 
 const Main: NextPage = () => {
-	const [content, setContent] = useState([1, 2, 3, 4, 5,6,7,8,9,10,11,12,13,14]);
+	const [content] = useState([1, 2, 3, 4, 5,6,7,8,9,10,11,12,13,14]);
 	
 	return (
 		<StyledWrapper>

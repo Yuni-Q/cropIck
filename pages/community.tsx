@@ -10,7 +10,7 @@ import Rank from '../components/Rank';
 import { PageContext } from './_app';
 
 const Community: React.FC = () => {
-  const [content, setContent] = useState([1, 2, 3]);
+  const [content] = useState([1, 2, 3]);
   const [crop, setCrop] = useState('');
 
   return (

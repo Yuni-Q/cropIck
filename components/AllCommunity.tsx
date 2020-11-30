@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import NewCommunity from './NewCommunity';
 import { Title } from './PopularCommunity';
 
 const AllCommunity: React.FC = () => {
