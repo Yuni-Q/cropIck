@@ -1,16 +1,20 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
 const GNB: React.FC = () => {
+  const router = useRouter();
+  console.log(11, router)
+  const {pathname} = router;
   return (
     <StyledGNBWrapper>
-      <a href="/">
+      <Link href="/">
       <StyledCropIckButton>CROP_ICK</StyledCropIckButton>
-      </a>
+      </Link>
       <StyledNav>
-        <Link href="/">검색</Link>
-        <Link href="/community">커뮤니티</Link>
+        <Link href="/crop"><span style={{fontWeight: pathname === '/crop' ? 700 : 400}}>검색</span></Link>
+        <Link href="/community"><span style={{marginLeft: 28, fontWeight: pathname === '/community' ? 700 : 400}}>커뮤니티</span></Link>
       </StyledNav>
     </StyledGNBWrapper>
   )

@@ -1,9 +1,11 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Category } from '../pages';
 import imgMain from '../static/images/img-main@2x.png';
 
 const MainSearch: React.FC = () => {
+  const router = useRouter();
   const [category, setCategory] = useState(Category.PLACE)
   const [sido, setSido] = useState('');
   const [gugun, setGugun] = useState('');
@@ -39,7 +41,13 @@ const MainSearch: React.FC = () => {
           </>}
         </StyledCategoryWrapper>
         <div>
-          <StyledButton><a>검색하기</a></StyledButton>
+          <StyledButton onClick={() => {
+            if (category === Category.CROPS) {
+              router.replace(`/crop?crop=${crop}`)
+              return;
+            }
+            router.replace(`/crop?sido=${sido}&gugun=${gugun}`)
+          }}>검색하기</StyledButton>
         </div>
       </div>
 
@@ -130,15 +138,11 @@ export const StyledButton = styled.button`
   border-radius: 3px;
   box-shadow: 1px 1px 4px 0 rgba(17, 17, 17, 0.2);
   background-color: #3da11e;
-  a {
-    width: 321px;
-    height: 20px;
-    font-family: NotoSansKR;
-    font-size: 14px;
-    font-weight: 500;
-    text-align: center;
-    color: #ffffff;
-  }
+  font-family: NotoSansKR;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
 `;
 
 export const StyledCategoryWrapper = styled.div`

@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { SectionWrapper, StyledFirstSection, StyledSecondSection, StyledWrapper } from '.';
@@ -11,6 +12,7 @@ import Rank from '../components/Rank';
 import { PageContext } from './_app';
 
 const Community: React.FC<{ crop: string }> = ({ crop }) => {
+  const router = useRouter();
   const [content] = useState([1, 2, 3]);
   const [cropName, setCropName] = useState('');
 
@@ -31,7 +33,10 @@ const Community: React.FC<{ crop: string }> = ({ crop }) => {
         {<StyledCategoryWrapper>
           <input placeholder="작물명 ex) 딸기" type="text" value={cropName} onChange={(e) => setCropName(e.target.value)} />
         </StyledCategoryWrapper>}
-        <StyledButton className="mt-0 ml-8 mb-0" style={{ width: 125 }}><a>검색</a></StyledButton>
+        <StyledButton className="mt-0 ml-8 mb-0" style={{ width: 125 }} onClick={() => {
+          router.replace(`/community?crop=${cropName}`)
+        }}
+        >검색</StyledButton>
       </SearchWrapper>}
       <SectionWrapper>
         <StyledFirstSection>
