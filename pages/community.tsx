@@ -69,7 +69,7 @@ export const getServerSideProps = async ({ pathname, query }: PageContext): Prom
 
 export default Community;
 
-const SearchWrapper = styled.div`
+export const SearchWrapper = styled.div`
   display: flex;
   margin: 35px 0;
 `;

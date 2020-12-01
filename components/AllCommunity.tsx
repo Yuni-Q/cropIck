@@ -149,13 +149,13 @@ const RankingSection = styled.div`
 
 `;
 
-const NavWrapper = styled.div`
+export const NavWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   margin: 30px 0 0;
 `;
 
-const NavNo = styled.div`
+export const NavNo = styled.div`
   width: 32px;
   height: 32px;
   margin: 0 10px;
