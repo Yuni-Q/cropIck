@@ -4,7 +4,7 @@ import { Category } from '../pages';
 import imgMain from '../static/images/img-main@2x.png';
 
 const MainSearch: React.FC = () => {
-  const [category, setCategory]  = useState(Category.PLACE)
+  const [category, setCategory] = useState(Category.PLACE)
   const [sido, setSido] = useState('');
   const [gugun, setGugun] = useState('');
   const [crop, setCrop] = useState('');
@@ -20,30 +20,30 @@ const MainSearch: React.FC = () => {
           나의 작물을 선택해보세요 :)
         </StyledTitle>
         <StyledSearchNavWrapper>
-          <StyledNavButton inable={category===Category.PLACE} onClick={() => setCategory(Category.PLACE)}>장소로 검색</StyledNavButton>
-          <StyledNavButton inable={category===Category.CROPS} onClick={() => setCategory(Category.CROPS)}>작물로 검색</StyledNavButton>
+          <StyledNavButton inable={category === Category.PLACE} onClick={() => setCategory(Category.PLACE)}>장소로 검색</StyledNavButton>
+          <StyledNavButton inable={category === Category.CROPS} onClick={() => setCategory(Category.CROPS)}>작물로 검색</StyledNavButton>
         </StyledSearchNavWrapper>
         <StyledCategoryWrapper>
-        {category===Category.PLACE && <><select value={sido} onChange={(e) => setSido(e.target.value)}>
-				  <option value="" disabled>시/도</option>
-				  <option value="서울시">서울시</option>
-				  <option value="대구시">대구시</option>
-			  </select>
-        <select value={gugun} onChange={(e) => setGugun(e.target.value)}>
-				  <option value="" disabled>구</option>
-				  <option value="북구">북구</option>
-				  <option value="동구">동구</option>
-			  </select></>}
-        {category===Category.CROPS&& <>
-        <input placeholder="작물명 ex) 딸기" type="text" value={crop} onChange={(e)=> setCrop(e.target.value)} />
-        </>}
+          {category === Category.PLACE && <><select value={sido} onChange={(e) => setSido(e.target.value)}>
+            <option value="" disabled>시/도</option>
+            <option value="서울시">서울시</option>
+            <option value="대구시">대구시</option>
+          </select>
+            <select value={gugun} onChange={(e) => setGugun(e.target.value)}>
+              <option value="" disabled>구</option>
+              <option value="북구">북구</option>
+              <option value="동구">동구</option>
+            </select></>}
+          {category === Category.CROPS && <>
+            <input placeholder="작물명 ex) 딸기" type="text" value={crop} onChange={(e) => setCrop(e.target.value)} />
+          </>}
         </StyledCategoryWrapper>
         <div>
-        <StyledButton><a>검색하기</a></StyledButton>
+          <StyledButton><a>검색하기</a></StyledButton>
         </div>
       </div>
-      
-      <StyledImg src={imgMain} alt="imgMain"/>
+
+      <StyledImg src={imgMain} alt="imgMain" />
     </StyledWrapper>
   )
 }
@@ -84,14 +84,14 @@ const StyledTitle = styled.div`
   color: #111111;
 `;
 
-const StyledSearchNavWrapper = styled.div`
+export const StyledSearchNavWrapper = styled.div`
   display: flex;
   margin: 60px 0 2px 0;  
 `;
 
-const StyledNavButton = styled.button<{inable: boolean}>`
-  ${({inable}) => {
-    if(!!inable) {
+export const StyledNavButton = styled.button<{ inable: boolean }>`
+  ${({ inable }) => {
+    if (!!inable) {
       return css`
         position: relative;
         width: 108px;
@@ -142,6 +142,8 @@ export const StyledButton = styled.button`
 `;
 
 export const StyledCategoryWrapper = styled.div`
+  display: flex;
+  align-items: center;
   select {
     width: 200px;
     margin: 30px 20px 30px 0;

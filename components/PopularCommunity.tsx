@@ -54,20 +54,20 @@ export const More = styled.div`
   color: #111111;
 `;
 
-const CropsWrapper = styled.div`
+export const CropsWrapper = styled.div`
 	display: flex;
   flex-wrap: wrap;
 `;
 
 
-const CropWrapper = styled.div`
+export const CropWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 `;
 
 
-const CropImage = styled.img`
+export const CropImage = styled.img`
 	width: 68px;
   height: 68px;
   margin: 16px 37px 2px 0;
@@ -75,7 +75,7 @@ const CropImage = styled.img`
   border-radius: 50%;
 `;
 
-const CropName = styled.div`
+export const CropName = styled.div`
   height: 24px;
   margin: 2px 56px 0 19px;
   font-family: NotoSansKR;
