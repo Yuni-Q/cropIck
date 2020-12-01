@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import Community, { SearchWrapper } from '../pages/community';
+import { SearchWrapper } from '../pages/community';
 import { NavNo, NavWrapper } from './AllCommunity';
 import { StyledButton, StyledCategoryWrapper } from './MainSearch';
 import { Title, TitleWrapper } from './PopularCommunity';

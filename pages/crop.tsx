@@ -188,13 +188,6 @@ const Main = styled.div`
   border-bottom: 1px solid #e5e7e5;
 `;
 
-const TempImg = styled.div`
-  width: 300px;
-  height: 300px;
-  padding: 25px;
-  border: solid 50px #3da11e;
-`;
-
 const Info = styled.div`
   margin: 80px 0 0;
 `;
