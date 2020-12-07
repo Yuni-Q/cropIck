@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import { Title, TitleWrapper } from './PopularCommunity';
@@ -14,9 +15,11 @@ const PopularCommunityContent: React.FC<{ content: number[] }> = ({ content }) =
             return (
               <RankSection key={no}>
                 <No>
-                  <div>
-                    사과 커뮤니티
+                  <Link href="/community?crop=사과">
+                    <div>
+                      사과 커뮤니티
                   </div>
+                  </Link>
                 </No>
                 {[1, 2, 3, 4, 5, 6].map(no => {
                   return (

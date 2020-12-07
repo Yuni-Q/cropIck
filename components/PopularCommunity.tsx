@@ -66,6 +66,7 @@ export const More = styled.div`
 export const CropsWrapper = styled.div`
 	display: flex;
   flex-wrap: wrap;
+  margin: 0 104px;
 `;
 
 
