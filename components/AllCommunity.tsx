@@ -158,4 +158,5 @@ export const NavNo = styled.div<{ current: boolean }>`
 const Wrapper = styled.div`
   overflow: hidden;
   transition: all 0.3s ease-out;
+  height: 42px;
 `;

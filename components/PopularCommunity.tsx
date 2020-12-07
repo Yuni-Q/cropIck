@@ -7,7 +7,9 @@ const PopularCommunity:React.FC = () => {
     <PopularCommunityWrapper>
       <TitleWrapper>
         <Title>인기 작물 커뮤니티</Title>
+        <Link href="/community">
         <More><div className="mt-1">더보기</div></More>
+        </Link>
       </TitleWrapper>
       
       <CropsWrapper>
