@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Title, TitleWrapper } from './PopularCommunity';
 
-const PopularCommunityContent: React.FC<{content: number[]}> = ({content}) => {
+const PopularCommunityContent: React.FC<{ content: number[] }> = ({ content }) => {
   return (
     <PopularCommunityContentWrapper>
       <TitleWrapper>
@@ -13,7 +13,11 @@ const PopularCommunityContent: React.FC<{content: number[]}> = ({content}) => {
           {content.map(no => {
             return (
               <RankSection key={no}>
-                <No>사과 커뮤니티</No>
+                <No>
+                  <div>
+                    사과 커뮤니티
+                  </div>
+                </No>
                 {[1, 2, 3, 4, 5, 6].map(no => {
                   return (
                     <NewsContent key={no}>과일과일과일과일과일과일과일과일과일과일과일과일과일과일과일과일과일</NewsContent>
@@ -32,7 +36,7 @@ const PopularCommunityContent: React.FC<{content: number[]}> = ({content}) => {
 export default PopularCommunityContent;
 
 const PopularCommunityContentWrapper = styled.section`
-	max-width: 1440px;
+	width: 1440px;
 `;
 
 const RankingWrapper = styled.div`
@@ -48,16 +52,28 @@ const RankingSection = styled.div`
 const RankSection = styled.div`
   width: 230px;
   margin: 0 14px 4px 0;
-  padding: 9px 48px 9px 12px;
+  padding: 8px 9px 8px;
   border-radius: 3px;
   box-shadow: 1px 1px 3px 0 rgba(32, 72, 20, 0.1);
 `;
 
 const No = styled.div`
+  border-bottom: 1px solid #e5e7e5; ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 0 0 6px 0;
   font-family: NotoSansKR;
   font-size: 16px;
   color: #2c2c2c;
+  ::after {
+    display: inline-block;
+    content: '';
+    background: url('/static/icon-chevron-right.svg') center center no-repeat;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+  }
 `;
 
 

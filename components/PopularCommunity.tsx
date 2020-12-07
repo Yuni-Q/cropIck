@@ -5,8 +5,8 @@ const PopularCommunity:React.FC = () => {
   return (
     <PopularCommunityWrapper>
       <TitleWrapper>
-        <Title>인기 작품 커뮤니티</Title>
-        <More>더보기</More>
+        <Title>인기 작물 커뮤니티</Title>
+        <More><div className="mt-1">더보기</div></More>
       </TitleWrapper>
       
       <CropsWrapper>
@@ -47,11 +47,20 @@ export const Title = styled.h2`
 `;
 
 export const More = styled.div`
+  display: flex;
+  align-items: center;
   margin: 0 88px 0 0;
   font-family: NotoSansKR;
   font-size: 16px;
-  text-align: center;
   color: #111111;
+  ::after {
+    display: inline-block;
+    content: '';
+    background: url('/static/icon-chevron-right.svg') center center no-repeat;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+  }
 `;
 
 export const CropsWrapper = styled.div`

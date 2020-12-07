@@ -13,8 +13,8 @@ const GNB: React.FC = () => {
       <StyledCropIckButton>CROP_ICK</StyledCropIckButton>
       </Link>
       <StyledNav>
-        <Link href="/crop"><span style={{fontWeight: pathname === '/crop' ? 700 : 400}}>검색</span></Link>
-        <Link href="/community"><span style={{marginLeft: 28, fontWeight: pathname === '/community' ? 700 : 400}}>커뮤니티</span></Link>
+        <Link href="/crop"><span style={{fontWeight: pathname === '/crop' ? 700 : 400,width: 24}}>검색</span></Link>
+        <Link href="/community"><span style={{marginLeft: 28, fontWeight: pathname === '/community' ? 700 : 400, width: 47}}>커뮤니티</span></Link>
       </StyledNav>
     </StyledGNBWrapper>
   )

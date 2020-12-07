@@ -15,7 +15,12 @@ const NewCommunity: React.FC = () => {
             return (
               <RankSection key={no}>
                 <No>+</No>
-                <Content>과일</Content>
+                <Content>
+                  <div>
+                    과일
+                  </div>
+
+                </Content>
               </RankSection>
             )
           })}
@@ -60,8 +65,20 @@ const No = styled.div`
 `;
 
 const Content = styled.div`
+  flex-grow: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 0 0 2px 8px;
   font-family: NotoSansKR;
   font-size: 14px;
   color: #111111;
+  ::after {
+    display: inline-block;
+    content: '';
+    background: url('/static/icon-chevron-right.svg') center center no-repeat;
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+  }
 `;
