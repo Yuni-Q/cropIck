@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Title } from './PopularCommunity';
+import right from '../static/icon-chevron-right.svg'
+import { LeftImg, RightImg } from '../pages/crop';
+
 
 const AllCommunity: React.FC = () => {
+  const [page, setPage] = useState(5);
+
   return (
     <PopularCommunityContentWrapper>
       <div>
@@ -16,7 +21,7 @@ const AllCommunity: React.FC = () => {
         return (
           <Wrapper key={no}>
             <Category onClick={(e) => {
-              if((e.target as any).parentElement.scrollHeight === (e.target as any).parentElement.clientHeight) {
+              if ((e.target as any).parentElement.scrollHeight === (e.target as any).parentElement.clientHeight) {
                 (e.target as any).parentElement.style.height = '42px';
               } else {
                 (e.target as any).parentElement.style.height = `${(e.target as any).parentElement.scrollHeight}px`;
@@ -26,47 +31,7 @@ const AllCommunity: React.FC = () => {
         </Category>
             <RankingWrapper>
               <RankingSection>
-                {[1, 2, 3, 4, 5].map(no => {
-                  return (
-                    <RankSection key={no}>
-                      <No>+</No>
-                      <Content>과일</Content>
-                    </RankSection>
-                  )
-                })}
-              </RankingSection>
-              <RankingSection>
-                {[1, 2, 3, 4, 5].map(no => {
-                  return (
-                    <RankSection key={no}>
-                      <No>+</No>
-                      <Content>과일</Content>
-                    </RankSection>
-                  )
-                })}
-              </RankingSection>
-              <RankingSection>
-                {[1, 2, 3, 4, 5].map(no => {
-                  return (
-                    <RankSection key={no}>
-                      <No>+</No>
-                      <Content>과일</Content>
-                    </RankSection>
-                  )
-                })}
-              </RankingSection>
-              <RankingSection>
-                {[1, 2, 3, 4, 5].map(no => {
-                  return (
-                    <RankSection key={no}>
-                      <No>+</No>
-                      <Content>과일</Content>
-                    </RankSection>
-                  )
-                })}
-              </RankingSection>
-              <RankingSection>
-                {[1, 2, 3, 4, 5].map(no => {
+                {[1, 2, 3, 4, 5, 6, 7, 8,9 ,10,11,].map(no => {
                   return (
                     <RankSection key={no}>
                       <No>+</No>
@@ -81,11 +46,22 @@ const AllCommunity: React.FC = () => {
       })}
 
       <NavWrapper>
-        {[1, 2, 3, 4, 5].map(no => {
+        {page - 1 >= 1 && <LeftImg src={right} alt="left" onClick={() => setPage(page => page - 1)} />}
+        {[page - 2, page - 1, page, page + 1, page + 2, page + 3, page + 4].map(no => {
+          if (no < 1) {
+            return;
+          }
+          if (page - 1 > 0 && page + 4 === no) {
+            return;
+          }
+          if (page - 2 > 0 && page + 3 === no) {
+            return;
+          }
           return (
-            <NavNo current={false} key={no}>{no}</NavNo>
+            <NavNo key={no} onClick={() => setPage(no)} current={page === no}>{no}</NavNo>
           )
         })}
+        <RightImg src={right} alt="right" onClick={() => setPage(page => page + 1)} />
       </NavWrapper>
     </PopularCommunityContentWrapper>
 
@@ -108,7 +84,6 @@ const SubTitle = styled.div`
 `;
 
 const Category = styled.button`
-
   width: 1440px;
   height: 42px;
   background-color: #f5f5f5;
@@ -119,7 +94,8 @@ const Category = styled.button`
   align-items: center;
 `;
 const RankSection = styled.div`
-   width: 287.5px;
+  flex-shrink: 0;
+  width: 287.5px;
   height: 42px;
   margin: 0 0 4px 0;
   padding: 9px 10px 9px 12px;
@@ -150,10 +126,13 @@ const Content = styled.div`
 
 const RankingWrapper = styled.div`
   display: flex;
+  width: 1440px;
 `
 
 const RankingSection = styled.div`
-
+  width: 1440px;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 export const NavWrapper = styled.div`
@@ -163,7 +142,7 @@ export const NavWrapper = styled.div`
   margin: 30px 0 0;
 `;
 
-export const NavNo = styled.div<{current: boolean}>`
+export const NavNo = styled.div<{ current: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -172,8 +151,8 @@ export const NavNo = styled.div<{current: boolean}>`
   margin: 0 10px;
   padding: 4px 11px;
   border-radius: 1px;
-  background-color: ${(({current}) => current ? '#3da11e' : '#ffffff')};
-  color: ${(({current}) => current ? '#fff' : '#000')};
+  background-color: ${(({ current }) => current ? '#3da11e' : '#ffffff')};
+  color: ${(({ current }) => current ? '#fff' : '#000')};
 `;
 
 const Wrapper = styled.div`
