@@ -92,7 +92,7 @@ interface ServerSideProps {
   }
 }
 
-export const getServerSideProps = async ({ pathname, query }: PageContext): Promise<ServerSideProps | void> => {
+export const getServerSideProps = async ({ query }: PageContext): Promise<ServerSideProps | void> => {
   let { crop = '' } = query;
   if (typeof crop === 'object') {
     crop = crop.join('');
