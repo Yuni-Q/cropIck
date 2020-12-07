@@ -268,13 +268,13 @@ const Table = styled.table`
   }
 `;
 
-const LeftImg = styled.img`
+export const LeftImg = styled.img`
   width: 32px;
   height: 32px;
   transform: rotate(180deg);
   flex-shrink: 0;
 `;
-const RightImg = styled.img`
+export const RightImg = styled.img`
   width: 32px;
   height: 32px;
   flex-shrink: 0;

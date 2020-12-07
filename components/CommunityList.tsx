@@ -1,14 +1,20 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { SearchWrapper } from '../pages/community';
+import { LeftImg, RightImg } from '../pages/crop';
 import { NavNo, NavWrapper } from './AllCommunity';
 import { StyledButton, StyledCategoryWrapper } from './MainSearch';
 import { Title, TitleWrapper } from './PopularCommunity';
+import right from '../static/icon-chevron-right.svg'
+
 
 const CommunityList: React.FC = () => {
+  const router = useRouter();
   const [count, setCount] = useState('30')
   const [category, setCategory] = useState('all')
   const [cropName, setCropName] = useState('');
+  const [page, setPage] = useState(5);
 
   return (
     <PopularCommunityContentWrapper>
@@ -60,14 +66,27 @@ const CommunityList: React.FC = () => {
           {<StyledCategoryWrapper>
             <input placeholder="작물명 ex) 딸기" type="text" value={cropName} onChange={(e) => setCropName(e.target.value)} />
           </StyledCategoryWrapper>}
-          <StyledButton className="mt-0 ml-8 mb-0" style={{ width: 125 }}><a>검색</a></StyledButton>
+          <StyledButton className="mt-0 ml-8 mb-0" style={{ width: 125 }} onClick={() => {
+            router.replace(`/community?crop=${cropName}`)
+          }}>검색</StyledButton>
         </SearchWrapper>
         <NavWrapper>
-          {[1, 2, 3, 4, 5].map(no => {
+          {page -1 >= 1 && <LeftImg src={right} alt="left" onClick={() => setPage(page => page -1)} />}
+          {[page - 2, page - 1, page, page + 1, page + 2, page + 3, page + 4].map(no => {
+            if (no < 1) {
+              return;
+            }
+            if (page - 1 > 0 && page + 4 === no) {
+              return;
+            }
+            if (page - 2 > 0 && page + 3 === no) {
+              return;
+            }
             return (
-              <NavNo key={no}>{no}</NavNo>
+              <NavNo key={no} onClick={() => setPage(no)} current={page === no}>{no}</NavNo>
             )
           })}
+          <RightImg src={right} alt="right" onClick={() => setPage(page => page +1)} />
         </NavWrapper>
       </CommunityNav>
     </PopularCommunityContentWrapper>
