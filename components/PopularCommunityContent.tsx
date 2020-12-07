@@ -14,13 +14,13 @@ const PopularCommunityContent: React.FC<{ content: number[] }> = ({ content }) =
           {content.map(no => {
             return (
               <RankSection key={no}>
-                <No>
-                  <Link href="/community?crop=딸기">
+                <Link href="/community?crop=딸기">
+                  <No>
                     <div>
                       딸기 커뮤니티
                   </div>
-                  </Link>
-                </No>
+                  </No>
+                </Link>
                 {[1, 2, 3, 4, 5, 6].map(no => {
                   return (
                     <NewsContent key={no}>과일과일과일과일과일과일과일과일과일과일과일과일과일과일과일과일과일</NewsContent>
