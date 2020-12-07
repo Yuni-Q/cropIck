@@ -2,31 +2,33 @@ import React from 'react';
 import styled from 'styled-components';
 import { PopularCommunityWrapper, Title, TitleWrapper } from './PopularCommunity';
 
-const Rank: React.FC = () => {
+const Rank: React.FC<any> = ({rankArray}) => {
   return (
     <PopularCommunityWrapper>
       <TitleWrapper>
-        <Title>작물 검색</Title>
+        <Title>작물 검색 순위</Title>
       </TitleWrapper>
       <RankingWrapper>
 
         <RankingSection>
-          {[1, 2, 3, 4, 5].map(no => {
+          {rankArray.slice(0, 5).map((rank: any, idx: number) => {
+            console.log(rank);
             return (
-              <RankSection key={no}>
-                <No>{no}</No>
-                <Content>과일</Content>
+              <RankSection key={rank.name || idx}>
+                <No>{idx + 1}</No>
+                <Content>{rank.name || ''}</Content>
               </RankSection>
             )
           })}
         </RankingSection>
         <RankingSection>
-        {[6, 7, 8, 9, 10].map(no => {
+        {rankArray.slice(5, 10).map((rank: any, idx: number) => {
+          console.log(rank);
             return (
-            <RankSection key={no}>
-              <No>{no}</No>
-              <Content>과일</Content>
-            </RankSection>
+              <RankSection key={rank.name || idx}>
+                <No>{idx + 6}</No>
+                <Content>{rank.name || ''}</Content>
+              </RankSection>
             )
         })}
         </RankingSection>

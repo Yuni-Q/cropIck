@@ -97,10 +97,8 @@ export const getServerSideProps = async ({ pathname, query }: PageContext): Prom
   if (typeof crop === 'object') {
     crop = crop.join('');
   }
-  console.log(33, crop)
   try {
     const postArray = await Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/posts?name=${encodeURI(crop)}&page=1&range=30`)
-    console.log(111, postArray.data.result.posts)
     return {
       props: {
         crop,

@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import { NextPage } from 'next';
 import React, { useState } from 'react';
 import styled from 'styled-components';
@@ -15,28 +16,57 @@ export enum Category {
 	CROPS,
 }
 
-const Main: NextPage = () => {
-	const [content] = useState([1, 2, 3, 4, 5,6,7,8,9,10,11,12,13,14]);
-	
+const Main: NextPage<any> = ({rankArray}) => {
+	const [content] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
+
 	return (
 		<StyledWrapper>
 			<GNB />
 			<MainSearch />
 			<SectionWrapper>
-			<StyledFirstSection>
-				<PopularCommunity />
-				<News />
-			</StyledFirstSection>
-			<StyledSecondSection>
-				<Rank />
-				<NewCommunity />
-			</StyledSecondSection>
+				<StyledFirstSection>
+					<PopularCommunity />
+					<News />
+				</StyledFirstSection>
+				<StyledSecondSection>
+					<Rank rankArray={rankArray} />
+					<NewCommunity />
+				</StyledSecondSection>
 			</SectionWrapper>
 			<PopularCommunityContent content={content} />
 			<Footer />
 		</StyledWrapper>
 	);
 };
+
+interface ServerSideProps {
+	props: {
+		rankArray: any;
+	}
+}
+
+export const getServerSideProps = async (): Promise<ServerSideProps | void> => {
+	try {
+		const result = await Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/ranking`)
+		result.data.result.sort((a: any, b: any) => {
+			return b.count - a.count;
+		})
+		console.log(777,result.data.result)
+		return {
+			props: {
+				rankArray: [...result.data.result, 1,2,3,4,5,6,7,8,9,10],
+			}
+		}
+	} catch (error) {
+		console.log(error);
+		return {
+			props: {
+				rankArray: [],
+			}
+		}
+	}
+};
+
 
 export default Main;
 
