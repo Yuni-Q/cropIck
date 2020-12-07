@@ -1,5 +1,6 @@
+import Axios from 'axios';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { SectionWrapper, StyledFirstSection, StyledSecondSection, StyledWrapper } from '.';
 import AllCommunity from '../components/AllCommunity';
@@ -11,15 +12,45 @@ import PopularCommunityContent from '../components/PopularCommunityContent';
 import Rank from '../components/Rank';
 import { PageContext } from './_app';
 
-const Community: React.FC<{ crop: string }> = ({ crop }) => {
+const Community: React.FC<any> = ({ crop, initPostArray, totalPage }) => {
   const router = useRouter();
   const [content] = useState([1, 2, 3]);
   const [cropName, setCropName] = useState('');
+  const [range, setRange] = useState('30');
+  const [page, setPage] = useState(1);
+  const [postArray, setPostArray] = useState(initPostArray);
+  console.log(1111, postArray)
+
+  useEffect(()=> {
+    const get =  async() => {
+      try {
+        const result = await Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/posts?name=${encodeURI(crop)}&page=${page}&range=${range}`)
+        setPostArray(result.data.result.posts || []);
+      } catch(error) {
+        console.log(error);
+      }
+    }
+    console.log(page)
+    get();
+  }, [page])
+
+  useEffect(()=> {
+    const get =  async() => {
+      try {
+        const result = await Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/posts?name=${encodeURI(crop)}&page=1&range=${range}`)
+        setPostArray(result.data.result.posts || []);
+      } catch(error) {
+        console.log(error);
+      }
+    }
+    console.log(page)
+    get();
+  }, [range])
 
   return (
     <StyledWrapper>
       <GNB />
-      {crop && (
+      {postArray.length > 0 && (
         <div>
           <SubTitle>Enjoy your community</SubTitle>
           <Title>
@@ -29,7 +60,7 @@ const Community: React.FC<{ crop: string }> = ({ crop }) => {
           </Title>
         </div>
       )}
-      {!crop && <SearchWrapper>
+      {postArray.length === 0 && <SearchWrapper>
         {<StyledCategoryWrapper>
           <input placeholder="작물명 ex) 딸기" type="text" value={cropName} onChange={(e) => setCropName(e.target.value)} />
         </StyledCategoryWrapper>}
@@ -46,8 +77,8 @@ const Community: React.FC<{ crop: string }> = ({ crop }) => {
           <Rank />
         </StyledSecondSection>
       </SectionWrapper>
-      {crop && <CommunityList />}
-      {!crop && <AllCommunity />}
+      {postArray.length > 0 && <CommunityList postArray={postArray} range={range} setRange={setRange} page={page} setPage={setPage} totalPage={totalPage} />}
+      {postArray.length === 0 && <AllCommunity />}
       <Footer />
     </StyledWrapper>
   )
@@ -56,18 +87,35 @@ const Community: React.FC<{ crop: string }> = ({ crop }) => {
 interface ServerSideProps {
   props: {
     crop: string;
+    initPostArray: any;
+    totalPage: number;
   }
 }
 
 export const getServerSideProps = async ({ pathname, query }: PageContext): Promise<ServerSideProps | void> => {
-  console.log(33, pathname)
   let { crop = '' } = query;
   if (typeof crop === 'object') {
     crop = crop.join('');
   }
-  return {
-    props: {
-      crop,
+  console.log(33, crop)
+  try {
+    const postArray = await Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/posts?name=${encodeURI(crop)}&page=1&range=30`)
+    console.log(111, postArray.data.result.posts)
+    return {
+      props: {
+        crop,
+        initPostArray: postArray.data.result.posts || [],
+        totalPage: postArray.data.result.totalPage,
+      }  
+    }
+  } catch(error) {
+    console.log(error);
+    return {
+      props: {
+        crop,
+        initPostArray: [],
+        totalPage: 0,
+      }  
     }
   }
 };

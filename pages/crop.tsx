@@ -29,7 +29,7 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
   console.log(111, cropCurentArray)
 
   const expData = {
-    labels: ["사과", "배", "귤"],
+    labels: ["딸기", "배", "귤"],
     datasets: [
       {
         data: [60, 13, 27],
@@ -140,7 +140,7 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
               </div>
             </div>
             <Shortcuts>
-              <Link href='/community?crop=사과'>
+              <Link href='/community?crop=딸기'>
                 <div>
                   딸기 커뮤니티 바로가기
               </div>

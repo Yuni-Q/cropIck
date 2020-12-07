@@ -9,19 +9,17 @@ import { Title, TitleWrapper } from './PopularCommunity';
 import right from '../static/icon-chevron-right.svg'
 
 
-const CommunityList: React.FC = () => {
+const CommunityList: React.FC<any> = ({postArray,range, setRange, page, setPage, totalPage}) => {
   const router = useRouter();
-  const [count, setCount] = useState('30')
   const [category, setCategory] = useState('all')
   const [cropName, setCropName] = useState('');
-  const [page, setPage] = useState(5);
 
   return (
     <PopularCommunityContentWrapper>
       <TitleWrapper>
         <Title>커뮤니티 글</Title>
         <TitleButtonWrapper>
-          <select value={count} onChange={(e) => setCount(e.target.value)}>
+          <select value={range} onChange={(e) => setRange(e.target.value)}>
             <option value="30">30</option>
             <option value="60">60</option>
             <option value="100">100</option>
@@ -38,24 +36,21 @@ const CommunityList: React.FC = () => {
           <col width="10%" />
           <col width="60%" />
           <col width="10%" />
-          <col width="10%" />
-          <col width="10%" />
+          <col width="20%" />
         </colgroup>
         <tr>
           <th>번호</th>
           <th>제목</th>
           <th>글쓴이</th>
           <th>작성일</th>
-          <th>좋아요</th>
         </tr>
-        {[1, 2, 3, 4, 5].map(no => {
+        {postArray.map((post: any) => {
           return (
-            <tr key={no}>
-              <td>{no}</td>
-              <td>내용이 들어갑니다.</td>
-              <td>글쓴이</td>
-              <td>작성일</td>
-              <td>좋아요</td>
+            <tr key={post.id}>
+              <td>{post.id}</td>
+              <td>{post.title}</td>
+              <td>{post.author}</td>
+              <td>{post.created}</td>
             </tr>
           )
         })}
@@ -71,8 +66,11 @@ const CommunityList: React.FC = () => {
           }}>검색</StyledButton>
         </SearchWrapper>
         <NavWrapper>
-          {page -1 >= 1 && <LeftImg src={right} alt="left" onClick={() => setPage(page => page -1)} />}
+          {page -1 >= 1 && <LeftImg src={right} alt="left" onClick={() => setPage((page: any) => page - 1)} />}
           {[page - 2, page - 1, page, page + 1, page + 2, page + 3, page + 4].map(no => {
+            if( no > totalPage) {
+              return;
+            }
             if (no < 1) {
               return;
             }
@@ -86,7 +84,7 @@ const CommunityList: React.FC = () => {
               <NavNo key={no} onClick={() => setPage(no)} current={page === no}>{no}</NavNo>
             )
           })}
-          <RightImg src={right} alt="right" onClick={() => setPage(page => page +1)} />
+          {page < totalPage &&<RightImg src={right} alt="right" onClick={() => setPage((page: any) => page + 1)} />}
         </NavWrapper>
       </CommunityNav>
     </PopularCommunityContentWrapper>

@@ -15,9 +15,9 @@ const PopularCommunityContent: React.FC<{ content: number[] }> = ({ content }) =
             return (
               <RankSection key={no}>
                 <No>
-                  <Link href="/community?crop=사과">
+                  <Link href="/community?crop=딸기">
                     <div>
-                      사과 커뮤니티
+                      딸기 커뮤니티
                   </div>
                   </Link>
                 </No>
