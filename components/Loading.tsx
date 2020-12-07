@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Spinner from './Spinner';
 
 const StyledDiv = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
