@@ -32,7 +32,6 @@ const NewCommunity: React.FC = () => {
                 <Sub>{no.title}</Sub>
                 <Content>
                   {no.content}
-
                 </Content>
               </RankSection>
             )
@@ -54,7 +53,7 @@ const RankingSection = styled.div`
 
 `;
 
-const RankSection = styled.div`
+export const RankSection = styled.div`
   width: 474px;
   margin: 0 0 4px 0;
   padding: 9px 10px 9px 12px;
@@ -67,7 +66,7 @@ const RankSection = styled.div`
 `;
 
 
-const Content = styled.div`
+export const Content = styled.div`
   width:100%;
   flex-grow: 2;
   display: flex;
@@ -90,7 +89,7 @@ const Content = styled.div`
 `;
 
 
-const Sub = styled.div`
+export const Sub = styled.div`
   height: 20px;
   font-family: NotoSansKR;
   font-size: 14px;

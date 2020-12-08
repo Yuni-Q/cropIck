@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Category, StyledWrapper } from '.';
+import CropTrends from '../components/CropTrends';
 import Footer from '../components/Footer';
 import GNB from '../components/GNB';
 import IncomeAnalysis from '../components/IncomeAnalysis';
@@ -155,6 +156,7 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
             <Button current={buttonCategory === '주산지'} onClick={() => setButtonCategory('주산지')}>주산지</Button>          </div>
             {buttonCategory === '소득 분석' && <IncomeAnalysis />}
             {buttonCategory === '생산량 및 소비 분석' && <ProductionAndConsumptionAnalysis />}
+            {buttonCategory === '작물 동향' && <CropTrends />}
             {buttonCategory === '주산지' && <MainProductionArea />}
         </Info>
       </div>
