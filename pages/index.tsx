@@ -89,13 +89,15 @@ export const StyledWrapper = styled.div`
 
 export const SectionWrapper = styled.section`
 	display: flex;
+	justify-content: space-between;
 `;
 
 export const StyledFirstSection = styled.section`
-	width: 791px;
+	width: 859px;
 	border-right: 1px solid #e5e7e5; 
 `;
 
 export const StyledSecondSection = styled.section`
+	width: 486px;
 	margin: 0 0 0 40px;
 `

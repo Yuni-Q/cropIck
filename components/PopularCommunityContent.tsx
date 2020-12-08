@@ -42,25 +42,25 @@ const PopularCommunityContentWrapper = styled.section`
 	width: 1440px;
 `;
 
-const RankingWrapper = styled.div`
+export const RankingWrapper = styled.div`
   display: flex;
+  max-width: 1440px;
 `
 
-const RankingSection = styled.div`
-  margin: 0 30px 0 0;
+export const RankingSection = styled.div`
   display: flex;
   flex-wrap: wrap;
 `;
 
-const RankSection = styled.div`
-  width: 230px;
-  margin: 0 14px 4px 0;
+export const RankSection = styled.div`
+  width: 256px;
+  margin: 4px 16px;
   padding: 8px 9px 8px;
   border-radius: 3px;
   box-shadow: 1px 1px 3px 0 rgba(32, 72, 20, 0.1);
 `;
 
-const No = styled.div`
+export const No = styled.div`
   padding: 10px 0;
   border-bottom: 1px solid #e5e7e5; ;
   display: flex;
@@ -81,7 +81,7 @@ const No = styled.div`
 `;
 
 
-const NewsContent = styled.div`
+export const NewsContent = styled.div`
   margin: 12px 63px 12px 0;
   font-family: NotoSansKR;
   font-size: 14px;

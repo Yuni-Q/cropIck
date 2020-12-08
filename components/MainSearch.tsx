@@ -60,6 +60,8 @@ export default MainSearch;
 const StyledWrapper = styled.div`
   display: flex;
   align-items: center;
+  width: 1440px;
+  justify-content: space-between;
 `;
 
 const StyledImg = styled.img`
@@ -94,6 +96,7 @@ const StyledTitle = styled.div`
 export const StyledSearchNavWrapper = styled.div`
   display: flex;
   margin: 60px 0 2px 0;  
+  height: 108px;
 `;
 
 export const StyledNavButton = styled.button<{ inable: boolean }>`
@@ -145,6 +148,7 @@ export const StyledButton = styled.button`
 `;
 
 export const StyledCategoryWrapper = styled.div`
+  height: 108px;
   display: flex;
   align-items: center;
   select {

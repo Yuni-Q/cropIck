@@ -6,7 +6,7 @@ import { LeftImg, RightImg } from '../pages/crop';
 
 
 const AllCommunity: React.FC = () => {
-  const [page, setPage] = useState(5);
+  const [page, setPage] = useState(1);
 
   return (
     <PopularCommunityContentWrapper>
@@ -19,10 +19,14 @@ const AllCommunity: React.FC = () => {
       </div>
       {[1, 2, 3].map(no => {
         return (
-          <Wrapper key={no}>
+          <Wrapper key={no} style={{marginTop: 8}}>
             <Category onClick={(e) => {
               if ((e.target as any).parentElement.scrollHeight === (e.target as any).parentElement.clientHeight) {
-                (e.target as any).parentElement.style.height = '42px';
+                (e.target as any).parentElement.style.height = `${(e.target as any).parentElement.scrollHeight}px`;
+                console.log(111);
+                window.setTimeout(() => {
+                  (e.target as any).parentElement.style.height = '42px';
+                }, 100)
               } else {
                 (e.target as any).parentElement.style.height = `${(e.target as any).parentElement.scrollHeight}px`;
               }
@@ -84,6 +88,7 @@ const SubTitle = styled.div`
 `;
 
 const Category = styled.button`
+  padding: 0 16px;
   width: 1440px;
   height: 42px;
   background-color: #f5f5f5;
@@ -158,5 +163,5 @@ export const NavNo = styled.div<{ current: boolean }>`
 const Wrapper = styled.div`
   overflow: hidden;
   transition: all 0.3s ease-out;
-  height: 42px;
+  /* height: 42px; */
 `;

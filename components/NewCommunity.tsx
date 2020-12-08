@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import { PopularCommunityWrapper, Title, TitleWrapper } from './PopularCommunity';
@@ -28,12 +29,14 @@ const NewCommunity: React.FC = () => {
             content: '농촌교육포털',
           }].map((no) => {
             return (
-              <RankSection key={no.title}>
-                <Sub>{no.title}</Sub>
-                <Content>
-                  {no.content}
-                </Content>
-              </RankSection>
+              <Link href="http://rda.go.kr/infouseguid.do" key={no.title}>
+                <RankSection>
+                  <Sub>{no.title}</Sub>
+                  <Content>
+                    {no.content}
+                  </Content>
+                </RankSection>
+              </Link>
             )
           })}
         </RankingSection>

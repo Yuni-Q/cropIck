@@ -31,7 +31,7 @@ const PopularCommunity:React.FC<any> = ({communityRankArray}) => {
 export default PopularCommunity;
 
 export const PopularCommunityWrapper = styled.section`
-  max-width: 791px;
+  width: 859px;
 `;
 
 export const TitleWrapper = styled.div`

@@ -128,7 +128,7 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
             </div>
           </div>
         </Main> */}
-        <Info>
+        {!!initCrop && <Info>
           <InfoTitle>
             <div style={{ display: "flex" }}>
               <CropImage style={{ width: 150, height: 150 }} src="https://crop-pick.s3.ap-northeast-2.amazonaws.com/%E1%84%84%E1%85%A1%E1%86%AF%E1%84%80%E1%85%B5.jpg" />
@@ -158,7 +158,7 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
             {buttonCategory === '생산량 및 소비 분석' && <ProductionAndConsumptionAnalysis />}
             {buttonCategory === '작물 동향' && <CropTrends />}
             {buttonCategory === '주산지' && <MainProductionArea />}
-        </Info>
+        </Info>}
       </div>
       <Footer />
     </StyledWrapper>
@@ -190,7 +190,7 @@ export const getServerSideProps = async ({ query }: PageContext): Promise<Server
 
   return {
     props: {
-      initCrop: crop || '딸기',
+      initCrop: crop || '',
       initSido: sido,
       initGugun: gugun,
     }

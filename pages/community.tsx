@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -8,7 +9,8 @@ import CommunityList from '../components/CommunityList';
 import Footer from '../components/Footer';
 import GNB from '../components/GNB';
 import { StyledButton, StyledCategoryWrapper } from '../components/MainSearch';
-import PopularCommunityContent from '../components/PopularCommunityContent';
+import { TitleWrapper } from '../components/PopularCommunity';
+import PopularCommunityContent, { NewsContent, No, RankingSection, RankingWrapper, RankSection } from '../components/PopularCommunityContent';
 import Rank from '../components/Rank';
 import { PageContext } from './_app';
 
@@ -68,8 +70,34 @@ const Community: React.FC<any> = ({ crop, initPostArray, totalPage, rankArray, b
         >검색</StyledButton>
       </SearchWrapper>}
       <SectionWrapper>
-        <StyledFirstSection>
-          <PopularCommunityContent boardArray={boardArray.slice(0, 3)} />
+        <StyledFirstSection style={{width: 900}}>
+          <div>
+            <TitleWrapper>
+              <Title>인기 커뮤니티 글</Title>
+            </TitleWrapper>
+            <RankingWrapper>
+              <RankingSection>
+                {boardArray.slice(0, 3).map((board: any) => {
+                  return (
+                    <RankSection style={{width: 254}} key={board}>
+                      <Link href={`/community?crop=${board.name}`}>
+                        <No>
+                          <div>
+                            {board.name} 커뮤니티
+                    </div>
+                        </No>
+                      </Link>
+                      {board.post.map((no: any) => {
+                        return (
+                          <NewsContent key={no.id}>{no.title}</NewsContent>
+                        )
+                      })}
+                    </RankSection>
+                  )
+                })}
+              </RankingSection>
+            </RankingWrapper>
+          </div>
         </StyledFirstSection>
         <StyledSecondSection>
           <Rank rankArray={rankArray} />
@@ -134,6 +162,7 @@ export default Community;
 export const SearchWrapper = styled.div`
   display: flex;
   margin: 35px 0;
+  align-items: center;
 `;
 
 const SubTitle = styled.div`
