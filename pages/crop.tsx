@@ -54,7 +54,7 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
         <StyledNavButton inable={category === Category.CROPS} onClick={() => setCategory(Category.CROPS)}>작물로 검색</StyledNavButton>
       </CategoryWrapper>
       <StyledCategoryWrapper>
-        {category === Category.PLACE && <><select value={sido} onChange={(e) => setSido(e.target.value)}>
+        {category === Category.PLACE && <div style={{width: 420, display: "flex"}}><select value={sido} onChange={(e) => setSido(e.target.value)}>
           <option value="" disabled>시/도</option>
           <option value="서울시">서울시</option>
           <option value="대구시">대구시</option>
@@ -63,7 +63,7 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
             <option value="" disabled>구</option>
             <option value="북구">북구</option>
             <option value="동구">동구</option>
-          </select></>}
+          </select></div>}
         {category === Category.CROPS && <>
           <input placeholder="작물명 ex) {initCrop}" type="text" value={crop} onChange={(e) => setCrop(e.target.value)} />
         </>}

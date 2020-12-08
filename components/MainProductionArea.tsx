@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Box } from './IncomeAnalysis';
+import { Box, Cycle } from './IncomeAnalysis';
 
 const MainProductionArea: React.FC<any> = () => {
 
@@ -9,33 +9,28 @@ const MainProductionArea: React.FC<any> = () => {
       <img src="/static/invalid-name.svg" alt="map" width="30%" />
       <BoxWrapper>
         <Box>
-          <div>강원도</div>
+          <Cycle color="#3da11e"><div style={{zIndex: 100}}>강원도</div></Cycle>
           <div>11,963,668</div>
           <div>단위 : kg</div>
         </Box>
         <Box>
-          <div>경상북도</div>
+        <Cycle color="#3097e1"><div style={{zIndex: 100}}>경상북도</div></Cycle>
           <div>13,560,973</div>
           <div>단위 : kg</div>
         </Box>
         <Box>
-          <div>경상남도</div>
+        <Cycle color="#f9aa22"><div style={{zIndex: 100}}>경상남도</div></Cycle>
           <div>232,232</div>
           <div>단위 : kg</div>
         </Box>
         <Box>
-          <div>충청북도</div>
+        <Cycle color="#ff67e5"><div style={{zIndex: 100}}>충청북도</div></Cycle>
           <div>11,963,668</div>
           <div>단위 : kg</div>
         </Box>
         <Box>
-          <div>대구</div>
+        <Cycle color="#e14330"><div style={{zIndex: 100}}>대구</div></Cycle>
           <div>13,560,973</div>
-          <div>단위 : kg</div>
-        </Box>
-        <Box>
-          <div>부산</div>
-          <div>11,345,955</div>
           <div>단위 : kg</div>
         </Box>
       </BoxWrapper>
@@ -57,5 +52,5 @@ const BoxWrapper = styled.div`
   width: 864px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 `;
+

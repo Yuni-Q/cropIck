@@ -10,7 +10,7 @@ import Footer from '../components/Footer';
 import GNB from '../components/GNB';
 import { StyledButton, StyledCategoryWrapper } from '../components/MainSearch';
 import { TitleWrapper } from '../components/PopularCommunity';
-import PopularCommunityContent, { NewsContent, No, RankingSection, RankingWrapper, RankSection } from '../components/PopularCommunityContent';
+import { NewsContent, No, RankingSection, RankingWrapper, RankSection } from '../components/PopularCommunityContent';
 import Rank from '../components/Rank';
 import { PageContext } from './_app';
 

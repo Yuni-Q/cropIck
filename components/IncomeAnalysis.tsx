@@ -94,22 +94,22 @@ const IncomeAnalysis: React.FC<any> = () => {
     <div>
       <BoxWrapper>
         <Box>
-          <div>소득</div>
+          <Cycle color="#3da11e"><div style={{ zIndex: 100 }}>소득</div></Cycle>
           <div>11,963,668</div>
           <div>단위 : 원</div>
         </Box>
         <Box>
-          <div>부가가치</div>
+          <Cycle color="#3097e1"><div style={{ zIndex: 100 }}>부가가치</div></Cycle>
           <div>13,560,973</div>
           <div>단위 : 원</div>
         </Box>
         <Box>
-          <div>부가가치율</div>
+          <Cycle color="#f9aa22"><div style={{ zIndex: 100 }}>부가가치율</div></Cycle>
           <div>64.17</div>
           <div>%</div>
         </Box>
         <Box>
-          <div>소득률</div>
+          <Cycle color="#ff3c3c"><div style={{ zIndex: 100 }}>소득률</div></Cycle>
           <div>57</div>
           <div>%</div>
         </Box>
@@ -204,7 +204,7 @@ const Comment = styled.div`
 `;
 
 export const Box = styled.div`
-  margin: 0 0 12px;
+  margin: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -217,6 +217,8 @@ export const Box = styled.div`
   box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.2);
   background-color: #ffffff;
   div:nth-child(1) {
+    z-index: 100;
+    position: relative;
     font-family: NotoSansKR;
     font-size: 16px;
     font-weight: bold;
@@ -270,4 +272,20 @@ const BarTitle = styled.div`
   font-weight: bold;
   text-align: center;
   color: #ffffff;
+`;
+
+export const Cycle = styled.div<{ color: string; }>`
+  ::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: ${({ color }) => color};
+    opacity: 0.2;
+    z-index: 10
+  }
 `;
