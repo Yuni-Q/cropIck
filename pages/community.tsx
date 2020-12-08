@@ -98,17 +98,19 @@ export const getServerSideProps = async ({ query }: PageContext): Promise<Server
     crop = crop.join('');
   }
   try {
-    const postArray = await Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/posts?name=${encodeURI(crop)}&page=1&range=30`)
-    const result = await Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/ranking`)
-    result.data.result.sort((a: any, b: any) => {
+    const result = await Promise.all([
+      Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/posts?name=${encodeURI(crop)}&page=1&range=30`),
+      Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/ranking`),
+    ])
+    result[1].data.result.sort((a: any, b: any) => {
       return b.count - a.count;
     })
     return {
       props: {
         crop,
-        initPostArray: postArray.data.result.posts || [],
-        totalPage: postArray.data.result.totalPage,
-        rankArray: [...result.data.result, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        initPostArray: result[0].data.result.posts || [],
+        totalPage: result[0].data.result.totalPage,
+        rankArray: [...result[1].data.result, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
       }
     }
   } catch (error) {
