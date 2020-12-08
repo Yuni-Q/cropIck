@@ -18,7 +18,7 @@ const PopularCommunityContent: React.FC<any> = ({ boardArray }) => {
                   <No>
                     <div>
                       {board.name} 커뮤니티
-                  </div>
+                    </div>
                   </No>
                 </Link>
                 {board.post.map((no: any) => {
@@ -61,6 +61,7 @@ const RankSection = styled.div`
 `;
 
 const No = styled.div`
+  padding: 10px 0;
   border-bottom: 1px solid #e5e7e5; ;
   display: flex;
   justify-content: space-between;
