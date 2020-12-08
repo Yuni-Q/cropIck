@@ -16,8 +16,7 @@ export enum Category {
 	CROPS,
 }
 
-const Main: NextPage<any> = ({rankArray, communityRankArray}) => {
-	const [content] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
+const Main: NextPage<any> = ({ rankArray, communityRankArray, boardArray }) => {
 
 	return (
 		<StyledWrapper>
@@ -33,7 +32,7 @@ const Main: NextPage<any> = ({rankArray, communityRankArray}) => {
 					<NewCommunity />
 				</StyledSecondSection>
 			</SectionWrapper>
-			<PopularCommunityContent content={content} />
+			<PopularCommunityContent boardArray={boardArray} />
 			<Footer />
 		</StyledWrapper>
 	);
@@ -43,12 +42,18 @@ interface ServerSideProps {
 	props: {
 		rankArray: any;
 		communityRankArray: any;
+		boardArray: any;
 	}
 }
 
 export const getServerSideProps = async (): Promise<ServerSideProps | void> => {
 	try {
-		const result = await Promise.all([Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/ranking`), Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/boards/rank`)])
+		const result = await Promise.all([
+			Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/ranking`),
+			Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/boards/rank`),
+			Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/boards`),
+		])
+		console.log(111, result[2].data);
 		result[0].data.result.sort((a: any, b: any) => {
 			return b.count - a.count;
 		})
@@ -57,8 +62,9 @@ export const getServerSideProps = async (): Promise<ServerSideProps | void> => {
 		})
 		return {
 			props: {
-				rankArray: [...result[0].data.result, 1,2,3,4,5,6,7,8,9,10],
+				rankArray: [...result[0].data.result, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 				communityRankArray: result[1].data.result,
+				boardArray: result[2].data.result,
 			}
 		}
 	} catch (error) {
@@ -67,6 +73,7 @@ export const getServerSideProps = async (): Promise<ServerSideProps | void> => {
 			props: {
 				rankArray: [],
 				communityRankArray: [],
+				boardArray: [],
 			}
 		}
 	}

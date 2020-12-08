@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Title, TitleWrapper } from './PopularCommunity';
 
-const PopularCommunityContent: React.FC<{ content: number[] }> = ({ content }) => {
+const PopularCommunityContent: React.FC<any> = ({ boardArray }) => {
   return (
     <PopularCommunityContentWrapper>
       <TitleWrapper>
@@ -11,13 +11,13 @@ const PopularCommunityContent: React.FC<{ content: number[] }> = ({ content }) =
       </TitleWrapper>
       <RankingWrapper>
         <RankingSection>
-          {content.map(no => {
+          {boardArray.map((board: any) => {
             return (
-              <RankSection key={no}>
-                <Link href="/community?crop=딸기">
+              <RankSection key={board}>
+                <Link href={`/community?crop=${board}`}>
                   <No>
                     <div>
-                      딸기 커뮤니티
+                      {board} 커뮤니티
                   </div>
                   </No>
                 </Link>
