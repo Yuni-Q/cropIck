@@ -6,7 +6,7 @@ const NewCommunity: React.FC = () => {
   return (
     <PopularCommunityWrapper>
       <TitleWrapper>
-        <Title>신설 커뮤니티</Title>
+        <Title>도움이 되는 사이트</Title>
       </TitleWrapper>
       <RankingWrapper>
 
@@ -14,7 +14,7 @@ const NewCommunity: React.FC = () => {
           {[1, 2, 3, 4, 5].map(no => {
             return (
               <RankSection key={no}>
-                <No>+</No>
+                <Sub>{no}</Sub>
                 <Content>
                   <div>
                     과일
@@ -42,37 +42,30 @@ const RankingSection = styled.div`
 `;
 
 const RankSection = styled.div`
-   width: 474px;
-  height: 42px;
+  width: 474px;
   margin: 0 0 4px 0;
   padding: 9px 10px 9px 12px;
   border-radius: 3px;
   box-shadow: 1px 1px 3px 0 rgba(32, 72, 20, 0.1);
   background-color: #ffffff;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
 `;
 
-const No = styled.div`
-  font-family: NotoSansKR;
-  font-size: 16px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: #3da11e;
-`;
 
 const Content = styled.div`
+width:100%;
   flex-grow: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 0 2px 8px;
+  margin: 4px 0 4px 0;
+  height: 24px;
   font-family: NotoSansKR;
-  font-size: 14px;
-  color: #111111;
+  font-size: 16px;
+  font-weight: bold;
+  color: #3da11e;
   ::after {
     display: inline-block;
     content: '';
@@ -81,4 +74,12 @@ const Content = styled.div`
     height: 24px;
     vertical-align: middle;
   }
+`;
+
+
+const Sub = styled.div`
+  height: 20px;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  color: #676a66;
 `;
