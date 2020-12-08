@@ -11,14 +11,27 @@ const NewCommunity: React.FC = () => {
       <RankingWrapper>
 
         <RankingSection>
-          {[1, 2, 3, 4, 5].map(no => {
+          {[{
+            title: '통합 정보 사이트',
+            content: '농촌진흥청 정보이용도우미',
+          }, {
+            title: '농업기술',
+            content: '농사로',
+          }, {
+            title: '농업연구자료, 재배기술책',
+            content: '농업 도서관',
+          }, {
+            title: '출하량, 가격 동향',
+            content: '농산물 유통 정보',
+          }, {
+            title: '농업 교육 정보',
+            content: '농촌교육포털',
+          }].map((no) => {
             return (
-              <RankSection key={no}>
-                <Sub>{no}</Sub>
+              <RankSection key={no.title}>
+                <Sub>{no.title}</Sub>
                 <Content>
-                  <div>
-                    과일
-                  </div>
+                  {no.content}
 
                 </Content>
               </RankSection>
@@ -55,7 +68,7 @@ const RankSection = styled.div`
 
 
 const Content = styled.div`
-width:100%;
+  width:100%;
   flex-grow: 2;
   display: flex;
   justify-content: space-between;

@@ -7,10 +7,10 @@ const IncomeAnalysis: React.FC<any> = () => {
   const options = {
     plugins: {
       datalabels: {
-        display: (ctx: any) => {
+        display: () => {
           return true;
         },
-        formatter: (ctx: any, data: any) => {
+        formatter: (_: any, data: any) => {
           return `${(data.dataset.data[data.dataIndex]).toLocaleString()}`;
         },
         anchor: 'end',
@@ -39,10 +39,10 @@ const IncomeAnalysis: React.FC<any> = () => {
   const options2 = {
     plugins: {
       datalabels: {
-        display: (ctx: any) => {
+        display: () => {
           return true;
         },
-        formatter: (ctx: any, data: any) => {
+        formatter: (_: any, data: any) => {
           return `${(data.dataset.data[data.dataIndex]).toLocaleString()}`;
         },
         anchor: 'end',

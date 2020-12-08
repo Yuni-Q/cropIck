@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Category } from '../pages';
-import imgMain from '../static/images/img-main@2x.png';
 
 const MainSearch: React.FC = () => {
   const router = useRouter();
@@ -51,7 +50,7 @@ const MainSearch: React.FC = () => {
         </div>
       </div>
 
-      <StyledImg src={imgMain} alt="imgMain" />
+      <StyledImg src="/static/img-main@2x.jpg" alt="imgMain" />
     </StyledWrapper>
   )
 }

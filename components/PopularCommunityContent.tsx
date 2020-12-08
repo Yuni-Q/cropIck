@@ -14,16 +14,16 @@ const PopularCommunityContent: React.FC<any> = ({ boardArray }) => {
           {boardArray.map((board: any) => {
             return (
               <RankSection key={board}>
-                <Link href={`/community?crop=${board}`}>
+                <Link href={`/community?crop=${board.name}`}>
                   <No>
                     <div>
-                      {board} 커뮤니티
+                      {board.name} 커뮤니티
                   </div>
                   </No>
                 </Link>
-                {[1, 2, 3, 4, 5, 6].map(no => {
+                {board.post.map((no: any) => {
                   return (
-                    <NewsContent key={no}>과일과일과일과일과일과일과일과일과일과일과일과일과일과일과일과일과일</NewsContent>
+                    <NewsContent key={no.id}>{no.title}</NewsContent>
                   )
                 })}
               </RankSection>
