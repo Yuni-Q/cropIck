@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const PopularCommunity:React.FC<any> = ({communityRankArray}) => {
+  console.log(111, communityRankArray)
   return (
     <PopularCommunityWrapper>
       <TitleWrapper>
@@ -71,7 +72,6 @@ export const More = styled.div`
 export const CropsWrapper = styled.div`
 	display: flex;
   flex-wrap: wrap;
-  margin: 0 104px;
   height: 240px;
   overflow: hidden;
   align-items: flex-start;
