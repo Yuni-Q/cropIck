@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 const GNB: React.FC = () => {
   const router = useRouter();
-  console.log(11, router)
   const {pathname} = router;
   return (
     <StyledGNBWrapper>

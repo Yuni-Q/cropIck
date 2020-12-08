@@ -12,7 +12,6 @@ const Rank: React.FC<any> = ({rankArray}) => {
 
         <RankingSection>
           {rankArray.slice(0, 5).map((rank: any, idx: number) => {
-            console.log(rank);
             return (
               <RankSection key={rank.name || idx}>
                 <No>{idx + 1}</No>
@@ -23,7 +22,6 @@ const Rank: React.FC<any> = ({rankArray}) => {
         </RankingSection>
         <RankingSection>
         {rankArray.slice(5, 10).map((rank: any, idx: number) => {
-          console.log(rank);
             return (
               <RankSection key={rank.name || idx}>
                 <No>{idx + 6}</No>

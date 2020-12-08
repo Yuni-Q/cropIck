@@ -20,13 +20,13 @@ interface Props {
 const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
   const router = useRouter();
   const [category, setCategory] = useState(initCrop ? Category.CROPS : Category.PLACE)
+  const [buttonCategory, setButtonCategory] = useState('소득 분석');
   const [sido, setSido] = useState(initSido);
   const [gugun, setGugun] = useState(initGugun);
   const [crop, setCrop] = useState(initCrop);
   const cropArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   const [page, setPage] = useState(1);
   const cropCurentArray = cropArray.slice(page > 1 ? ((page - 1) * 16) : page -1, page > 1 ? ((page) * 16 ) : 16 )
-  console.log(111, cropCurentArray)
 
   const expData = {
     labels: ["딸기", "배", "귤"],
@@ -148,6 +148,14 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
 
             </Shortcuts>
           </InfoTitle>
+          <div className="mt-10" style={{display: 'flex'}}>
+            <Button current={buttonCategory === '소득 분석'} onClick={() => setButtonCategory('소득 분석')}>소득 분석</Button>
+            <Button current={buttonCategory === '생산량 및 소비 분석'} onClick={() => setButtonCategory('생산량 및 소비 분석')}>생산량 및 소비 분석</Button>
+            <Button current={buttonCategory === '해당 지역 소비 성향'} onClick={() => setButtonCategory('해당 지역 소비 성향')}>해당 지역 소비 성향</Button>
+            <Button current={buttonCategory === '동향'} onClick={() => setButtonCategory('동향')}>동향</Button>
+            <Button current={buttonCategory === '주산지'} onClick={() => setButtonCategory('주산지')}>주산지</Button>
+            <Button current={buttonCategory === '유통 채널 특성'} onClick={() => setButtonCategory('유통 채널 특성')}>유통 채널 특성</Button>
+          </div>
           <Table width="100%">
             <colgroup>
               <col width="30%" />
@@ -162,6 +170,7 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
               )
             })}
           </Table>
+          <Comment>위 표에서 구입액, 구매빈도, 1회 평균 구입액은 2010 ~ 2016년도 평균값을 의미합니다.</Comment>
         </Info>
       </div>
       <Footer />
@@ -181,7 +190,6 @@ interface ServerSideProps {
 }
 
 export const getServerSideProps = async ({ pathname, query }: PageContext): Promise<ServerSideProps | void> => {
-  console.log(33, pathname)
   let { crop = '', gugun = '', sido = '' } = query;
   if (typeof crop === 'object') {
     crop = crop.join('');
@@ -325,4 +333,25 @@ const Shortcuts = styled.div`
     height: 24px;
     vertical-align: middle;
   }
+`;
+
+const Button = styled.button<{current: boolean}>`
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 240px;
+  height: 60px;
+  padding: 19px 55px 17px 56px;
+  background-color: ${({current}) => current ? '#3da11e' : '#fff'} ;
+  font-size: 16px;
+  text-align: center;
+  color: ${({current}) => current ? '#fff' : '#898c88'};
+`;
+
+const Comment = styled.div`
+  margin: 12px 0 0;
+  font-family: NotoSansKR;
+  font-size: 14px;
+  color: #898c88;
 `;

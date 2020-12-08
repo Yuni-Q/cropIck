@@ -16,7 +16,7 @@ export enum Category {
 	CROPS,
 }
 
-const Main: NextPage<any> = ({rankArray}) => {
+const Main: NextPage<any> = ({rankArray, communityRankArray}) => {
 	const [content] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]);
 
 	return (
@@ -25,7 +25,7 @@ const Main: NextPage<any> = ({rankArray}) => {
 			<MainSearch />
 			<SectionWrapper>
 				<StyledFirstSection>
-					<PopularCommunity />
+					<PopularCommunity communityRankArray={communityRankArray} />
 					<News />
 				</StyledFirstSection>
 				<StyledSecondSection>
@@ -42,18 +42,23 @@ const Main: NextPage<any> = ({rankArray}) => {
 interface ServerSideProps {
 	props: {
 		rankArray: any;
+		communityRankArray: any;
 	}
 }
 
 export const getServerSideProps = async (): Promise<ServerSideProps | void> => {
 	try {
-		const result = await Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/ranking`)
-		result.data.result.sort((a: any, b: any) => {
+		const result = await Promise.all([Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/ranking`), Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/boards/rank`)])
+		result[0].data.result.sort((a: any, b: any) => {
 			return b.count - a.count;
+		})
+		result[1].data.result.sort((a: any, b: any) => {
+			return b.score - a.score;
 		})
 		return {
 			props: {
-				rankArray: [...result.data.result, 1,2,3,4,5,6,7,8,9,10],
+				rankArray: [...result[0].data.result, 1,2,3,4,5,6,7,8,9,10],
+				communityRankArray: result[1].data.result,
 			}
 		}
 	} catch (error) {
@@ -61,6 +66,7 @@ export const getServerSideProps = async (): Promise<ServerSideProps | void> => {
 		return {
 			props: {
 				rankArray: [],
+				communityRankArray: [],
 			}
 		}
 	}

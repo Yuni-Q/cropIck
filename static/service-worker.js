@@ -68,7 +68,6 @@ self.addEventListener('fetch', (event) => {
 self.addEventListener('push', event => {
 	console.log(`Push had this data: "${event.data.text()}"`);
 	const pushInfo = JSON.parse(event.data.text());
-	console.log(1312312, pushInfo)
 	const options = { // 푸쉬 알림창에 대한 각종 설정
 		body: pushInfo.context, // 푸쉬 매세지에 대한 설정.
 		icon: '/favicon.png', // 알림 아이콘 사이즈
