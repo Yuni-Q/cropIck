@@ -59,6 +59,7 @@ export const getServerSideProps = async (): Promise<ServerSideProps | void> => {
 		result[1].data.result.sort((a: any, b: any) => {
 			return b.score - a.score;
 		})
+
 		return {
 			props: {
 				rankArray: [...result[0].data.result, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],

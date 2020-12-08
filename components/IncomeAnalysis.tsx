@@ -182,7 +182,7 @@ const Table = styled.table`
   th {
     height: 48px;
     margin: 0 20px 0 0;
-    padding: 9px 0 9px;
+    padding: 15px 0 15px;
     background-color: #f5f5f5;
     font-weight: 700;
   }
@@ -203,7 +203,8 @@ const Comment = styled.div`
   color: #898c88;
 `;
 
-const Box = styled.div`
+export const Box = styled.div`
+  margin: 0 0 12px;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -6,6 +6,7 @@ import { Category, StyledWrapper } from '.';
 import Footer from '../components/Footer';
 import GNB from '../components/GNB';
 import IncomeAnalysis from '../components/IncomeAnalysis';
+import MainProductionArea from '../components/MainProductionArea';
 import { StyledButton, StyledCategoryWrapper, StyledNavButton } from '../components/MainSearch';
 import { CropImage } from '../components/PopularCommunity';
 import ProductionAndConsumptionAnalysis from '../components/ProductionAndConsumptionAnalysis';
@@ -154,6 +155,7 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
             <Button current={buttonCategory === '주산지'} onClick={() => setButtonCategory('주산지')}>주산지</Button>          </div>
             {buttonCategory === '소득 분석' && <IncomeAnalysis />}
             {buttonCategory === '생산량 및 소비 분석' && <ProductionAndConsumptionAnalysis />}
+            {buttonCategory === '주산지' && <MainProductionArea />}
         </Info>
       </div>
       <Footer />
