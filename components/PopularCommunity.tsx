@@ -3,7 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const PopularCommunity:React.FC<any> = ({communityRankArray}) => {
-  console.log(111, communityRankArray)
   return (
     <PopularCommunityWrapper>
       <TitleWrapper>

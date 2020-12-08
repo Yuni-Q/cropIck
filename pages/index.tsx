@@ -17,7 +17,6 @@ export enum Category {
 }
 
 const Main: NextPage<any> = ({ rankArray, communityRankArray, boardArray }) => {
-	console.log(22, communityRankArray)
 	return (
 		<StyledWrapper>
 			<GNB />
