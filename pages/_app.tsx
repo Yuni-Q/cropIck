@@ -71,7 +71,8 @@ MyApp.getInitialProps = async (context) => {
 
 export interface PageContext extends NextPageContext {
 	params: {
-		id?: string
+		id?: string;
+		name?: string;
 	};
 }
 

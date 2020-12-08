@@ -1,15 +1,16 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { SearchWrapper } from '../pages/community';
 import { LeftImg, RightImg } from '../pages/crop';
+import right from '../static/icon-chevron-right.svg';
 import { NavNo, NavWrapper } from './AllCommunity';
 import { StyledButton, StyledCategoryWrapper } from './MainSearch';
 import { Title, TitleWrapper } from './PopularCommunity';
-import right from '../static/icon-chevron-right.svg'
 
 
-const CommunityList: React.FC<any> = ({postArray,range, setRange, page, setPage, totalPage}) => {
+const CommunityList: React.FC<any> = ({crop, postArray,range, setRange, page, setPage, totalPage}) => {
   const router = useRouter();
   const [category, setCategory] = useState('all')
   const [cropName, setCropName] = useState('');
@@ -24,7 +25,7 @@ const CommunityList: React.FC<any> = ({postArray,range, setRange, page, setPage,
             <option value="60">60</option>
             <option value="100">100</option>
           </select>
-          <button>새 글 작성</button>
+          <Link href={`/community/${crop}`}><button>새 글 작성</button></Link>
         </TitleButtonWrapper>
       </TitleWrapper>
       <Category>
@@ -46,7 +47,7 @@ const CommunityList: React.FC<any> = ({postArray,range, setRange, page, setPage,
         </tr>
         {postArray.map((post: any) => {
           return (
-            <tr key={post.id}>
+            <tr key={post.id} onClick={() => router.push(`/community/${post.id}`)}>
               <td>{post.id}</td>
               <td>{post.title}</td>
               <td>{post.author}</td>

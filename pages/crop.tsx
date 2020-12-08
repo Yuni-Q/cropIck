@@ -1,15 +1,14 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Category, StyledWrapper } from '.';
 import Footer from '../components/Footer';
 import GNB from '../components/GNB';
+import IncomeAnalysis from '../components/IncomeAnalysis';
 import { StyledButton, StyledCategoryWrapper, StyledNavButton } from '../components/MainSearch';
-import { CropImage, CropName, CropsWrapper, CropWrapper } from '../components/PopularCommunity';
-import { Doughnut } from "react-chartjs-2";
+import { CropImage } from '../components/PopularCommunity';
 import { PageContext } from './_app';
-import { useRouter } from 'next/router';
-import right from '../static/icon-chevron-right.svg'
-import Link from 'next/link';
 
 interface Props {
   initCrop: string;
@@ -24,26 +23,26 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
   const [sido, setSido] = useState(initSido);
   const [gugun, setGugun] = useState(initGugun);
   const [crop, setCrop] = useState(initCrop);
-  const cropArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
-  const [page, setPage] = useState(1);
-  const cropCurentArray = cropArray.slice(page > 1 ? ((page - 1) * 16) : page -1, page > 1 ? ((page) * 16 ) : 16 )
+  // const cropArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+  // const [page, setPage] = useState(1);
+  // const cropCurentArray = cropArray.slice(page > 1 ? ((page - 1) * 16) : page -1, page > 1 ? ((page) * 16 ) : 16 )
 
-  const expData = {
-    labels: ["딸기", "배", "귤"],
-    datasets: [
-      {
-        data: [60, 13, 27],
-        borderWidth: 2,
-        hoverBorderWidth: 3,
-        backgroundColor: [
-          "rgba(238, 102, 121, 1)",
-          "rgba(98, 181, 229, 1)",
-          "rgba(255, 198, 0, 1)"
-        ],
-        fill: true
-      }
-    ]
-  };
+  // const expData = {
+  //   labels: ["{initCrop}", "배", "귤"],
+  //   datasets: [
+  //     {
+  //       data: [60, 13, 27],
+  //       borderWidth: 2,
+  //       hoverBorderWidth: 3,
+  //       backgroundColor: [
+  //         "rgba(238, 102, 121, 1)",
+  //         "rgba(98, 181, 229, 1)",
+  //         "rgba(255, 198, 0, 1)"
+  //       ],
+  //       fill: true
+  //     }
+  //   ]
+  // };
   return (
     <StyledWrapper>
       <GNB />
@@ -63,7 +62,7 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
             <option value="동구">동구</option>
           </select></>}
         {category === Category.CROPS && <>
-          <input placeholder="작물명 ex) 딸기" type="text" value={crop} onChange={(e) => setCrop(e.target.value)} />
+          <input placeholder="작물명 ex) {initCrop}" type="text" value={crop} onChange={(e) => setCrop(e.target.value)} />
         </>}
         <StyledButton className="m-0 ml-7" onClick={() => {
           if (category === Category.CROPS) {
@@ -74,7 +73,7 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
         }}>검색하기</StyledButton>
       </StyledCategoryWrapper>
       <div>
-        <Title>경기도 부천시 현재 작물 현황입니다.</Title>
+        {/* <Title>경기도 부천시 현재 작물 현황입니다.</Title>
         <Main>
           <div style={{ display: "flex", alignItems: "center" }}>
             <div style={{ width: 350, height: 300 }}>
@@ -125,7 +124,7 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
               <Pagenation>{`${page} / ${Math.ceil(cropArray.length / 14)}`}</Pagenation>
             </div>
           </div>
-        </Main>
+        </Main> */}
         <Info>
           <InfoTitle>
             <div style={{ display: "flex" }}>
@@ -134,43 +133,25 @@ const Crop: React.FC<Props> = ({ initCrop, initSido, initGugun }) => {
                 <InfoTitle1>과일류</InfoTitle1>
                 <InfoTitle2>36.7 농가 사용중</InfoTitle2>
                 <div style={{ display: "flex" }}>
-                  <InfoTitle3>딸기</InfoTitle3>
+                  <InfoTitle3>{initCrop}</InfoTitle3>
                   <InfoTitle4>단호박은 서양계 호박의 한 품종으로 당도가 높고 밤 맛이 난다 하여 밤호박이라고도 한다. 풍부한 당질과 영양분에 비해 열량은 낮고, 식이섬유가 풍부하여 소화를 돕는다.</InfoTitle4>
                 </div>
               </div>
             </div>
             <Shortcuts>
-              <Link href='/community?crop=딸기'>
+              <Link href={`/community?crop=${initCrop}`}>
                 <div>
-                  딸기 커뮤니티 바로가기
+                  {initCrop} 커뮤니티 바로가기
               </div>
               </Link>
-
             </Shortcuts>
           </InfoTitle>
-          <div className="mt-10" style={{display: 'flex'}}>
+          <div className="mt-10" style={{ display: 'flex' }}>
             <Button current={buttonCategory === '소득 분석'} onClick={() => setButtonCategory('소득 분석')}>소득 분석</Button>
             <Button current={buttonCategory === '생산량 및 소비 분석'} onClick={() => setButtonCategory('생산량 및 소비 분석')}>생산량 및 소비 분석</Button>
-            <Button current={buttonCategory === '해당 지역 소비 성향'} onClick={() => setButtonCategory('해당 지역 소비 성향')}>해당 지역 소비 성향</Button>
-            <Button current={buttonCategory === '동향'} onClick={() => setButtonCategory('동향')}>동향</Button>
-            <Button current={buttonCategory === '주산지'} onClick={() => setButtonCategory('주산지')}>주산지</Button>
-            <Button current={buttonCategory === '유통 채널 특성'} onClick={() => setButtonCategory('유통 채널 특성')}>유통 채널 특성</Button>
-          </div>
-          <Table width="100%">
-            <colgroup>
-              <col width="30%" />
-              <col width="60%" />
-            </colgroup>
-            {[1, 2, 3, 4, 5].map(no => {
-              return (
-                <tr key={no}>
-                  <td>{no}</td>
-                  <td>내용이 들어갑니다.</td>
-                </tr>
-              )
-            })}
-          </Table>
-          <Comment>위 표에서 구입액, 구매빈도, 1회 평균 구입액은 2010 ~ 2016년도 평균값을 의미합니다.</Comment>
+            <Button current={buttonCategory === '작물 동향'} onClick={() => setButtonCategory('작물 동향')}>작물 동향</Button>
+            <Button current={buttonCategory === '주산지'} onClick={() => setButtonCategory('주산지')}>주산지</Button>          </div>
+            {buttonCategory === '소득 분석' && <IncomeAnalysis />}
         </Info>
       </div>
       <Footer />
@@ -189,7 +170,7 @@ interface ServerSideProps {
   }
 }
 
-export const getServerSideProps = async ({ pathname, query }: PageContext): Promise<ServerSideProps | void> => {
+export const getServerSideProps = async ({ query }: PageContext): Promise<ServerSideProps | void> => {
   let { crop = '', gugun = '', sido = '' } = query;
   if (typeof crop === 'object') {
     crop = crop.join('');
@@ -200,9 +181,10 @@ export const getServerSideProps = async ({ pathname, query }: PageContext): Prom
   if (typeof sido === 'object') {
     sido = sido.join('');
   }
+
   return {
     props: {
-      initCrop: crop,
+      initCrop: crop || '딸기',
       initSido: sido,
       initGugun: gugun,
     }
@@ -213,21 +195,21 @@ const CategoryWrapper = styled.div`
   display: flex;
 `;
 
-const Title = styled.h1`
-  width: 572px;
-  height: 58px;
-  font-family: NotoSansKR;
-  font-size: 38px;
-  font-weight: bold;
-  line-height: 1.53;
-  color: #111111;
-`;
+// const Title = styled.h1`
+//   width: 572px;
+//   height: 58px;
+//   font-family: NotoSansKR;
+//   font-size: 38px;
+//   font-weight: bold;
+//   line-height: 1.53;
+//   color: #111111;
+// `;
 
-const Main = styled.div`
-  display: flex;
-  padding: 0 0 50px;
-  border-bottom: 1px solid #e5e7e5;
-`;
+// const Main = styled.div`
+//   display: flex;
+//   padding: 0 0 50px;
+//   border-bottom: 1px solid #e5e7e5;
+// `;
 
 const Info = styled.div`
   margin: 80px 0 0;
@@ -239,8 +221,11 @@ const InfoTitle = styled.div`
 `;
 
 const InfoTitle1 = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 17px 6px 0;
-  padding: 6px 19.5px 6px 12.5px;
+  padding: 6px 19.5px;
   border-radius: 18px;
   background-color:#3da11e;
   font-family: NotoSansKR;
@@ -280,21 +265,6 @@ const InfoTitle4 = styled.div`
   color: #2c2c2c;
 `;
 
-const Table = styled.table`
-  margin: 50px 0 0;
-  width: 100%;
-  td {
-    height: 73px;
-    vertical-align: middle;
-    padding: 0 0 0 12px;
-    :nth-child(1) {
-      background-color: #f5f5f5;
-    }
-    :nth-child(2) {
-      background-color: #fff;
-    }
-  }
-`;
 
 export const LeftImg = styled.img`
   width: 32px;
@@ -308,18 +278,18 @@ export const RightImg = styled.img`
   flex-shrink: 0;
 `;
 
-const CropsContainer = styled.div`
-  margin: 64px 0 0;
-  display: flex;
-  align-items: center;
-  width: 1076px;
-  overflow: hidden;
-`;
+// const CropsContainer = styled.div`
+//   margin: 64px 0 0;
+//   display: flex;
+//   align-items: center;
+//   width: 1076px;
+//   overflow: hidden;
+// `;
 
-const Pagenation = styled.div`
-  margin: 21px 0 0;
-  text-align: center;
-`;
+// const Pagenation = styled.div`
+//   margin: 21px 0 0;
+//   text-align: center;
+// `;
 
 const Shortcuts = styled.div`
   height: 24px;
@@ -335,23 +305,16 @@ const Shortcuts = styled.div`
   }
 `;
 
-const Button = styled.button<{current: boolean}>`
+const Button = styled.button<{ current: boolean }>`
   flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 240px;
+  width: 25%;
   height: 60px;
   padding: 19px 55px 17px 56px;
-  background-color: ${({current}) => current ? '#3da11e' : '#fff'} ;
+  background-color: ${({ current }) => current ? '#3da11e' : '#fff'} ;
   font-size: 16px;
   text-align: center;
-  color: ${({current}) => current ? '#fff' : '#898c88'};
-`;
-
-const Comment = styled.div`
-  margin: 12px 0 0;
-  font-family: NotoSansKR;
-  font-size: 14px;
-  color: #898c88;
+  color: ${({ current }) => current ? '#fff' : '#898c88'};
 `;

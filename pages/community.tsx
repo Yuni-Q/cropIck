@@ -12,9 +12,8 @@ import PopularCommunityContent from '../components/PopularCommunityContent';
 import Rank from '../components/Rank';
 import { PageContext } from './_app';
 
-const Community: React.FC<any> = ({ crop, initPostArray, totalPage, rankArray }) => {
+const Community: React.FC<any> = ({ crop, initPostArray, totalPage, rankArray, boardArray }) => {
   const router = useRouter();
-  const [content] = useState([1, 2, 3]);
   const [cropName, setCropName] = useState('');
   const [range, setRange] = useState('30');
   const [page, setPage] = useState(1);
@@ -23,7 +22,7 @@ const Community: React.FC<any> = ({ crop, initPostArray, totalPage, rankArray })
   useEffect(() => {
     const get = async () => {
       try {
-        const result = await Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/posts?name=${encodeURI(crop)}&page=${page}&range=${range}`)
+        const result = await Axios.get(`https://umzzar.com/api/v1/posts?name=${encodeURI(crop)}&page=${page}&range=${range}`)
         setPostArray(result.data.result.posts || []);
       } catch (error) {
         console.log(error);
@@ -36,7 +35,7 @@ const Community: React.FC<any> = ({ crop, initPostArray, totalPage, rankArray })
   useEffect(() => {
     const get = async () => {
       try {
-        const result = await Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/posts?name=${encodeURI(crop)}&page=1&range=${range}`)
+        const result = await Axios.get(`https://umzzar.com/api/v1/posts?name=${encodeURI(crop)}&page=1&range=${range}`)
         setPostArray(result.data.result.posts || []);
       } catch (error) {
         console.log(error);
@@ -53,7 +52,7 @@ const Community: React.FC<any> = ({ crop, initPostArray, totalPage, rankArray })
         <div>
           <SubTitle>Enjoy your community</SubTitle>
           <Title>
-            딸기 커뮤니티에 어서 오세요.<br />
+            {crop} 커뮤니티에 어서 오세요.<br />
             무슨 이야기라도<br />
             재미있고 유익하게-
           </Title>
@@ -70,13 +69,13 @@ const Community: React.FC<any> = ({ crop, initPostArray, totalPage, rankArray })
       </SearchWrapper>}
       <SectionWrapper>
         <StyledFirstSection>
-          <PopularCommunityContent content={content} />
+          <PopularCommunityContent boardArray={boardArray.slice(0, 3)} />
         </StyledFirstSection>
         <StyledSecondSection>
           <Rank rankArray={rankArray} />
         </StyledSecondSection>
       </SectionWrapper>
-      {postArray.length > 0 && <CommunityList postArray={postArray} range={range} setRange={setRange} page={page} setPage={setPage} totalPage={totalPage} />}
+      {postArray.length > 0 && <CommunityList crop={crop} postArray={postArray} range={range} setRange={setRange} page={page} setPage={setPage} totalPage={totalPage} />}
       {postArray.length === 0 && <AllCommunity />}
       <Footer />
     </StyledWrapper>
@@ -88,7 +87,8 @@ interface ServerSideProps {
     crop: string;
     initPostArray: any;
     totalPage: number;
-    rankArray: any
+    rankArray: any;
+    boardArray: any;
   }
 }
 
@@ -99,8 +99,9 @@ export const getServerSideProps = async ({ query }: PageContext): Promise<Server
   }
   try {
     const result = await Promise.all([
-      Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/posts?name=${encodeURI(crop)}&page=1&range=30`),
-      Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/ranking`),
+      Axios.get(`https://umzzar.com/api/v1/posts?name=${encodeURI(crop)}&page=1&range=30`),
+      Axios.get(`https://umzzar.com/api/v1/ranking`),
+      Axios.get(`https://umzzar.com/api/v1/boards`),
     ])
     result[1].data.result.sort((a: any, b: any) => {
       return b.count - a.count;
@@ -110,7 +111,8 @@ export const getServerSideProps = async ({ query }: PageContext): Promise<Server
         crop,
         initPostArray: result[0].data.result.posts || [],
         totalPage: result[0].data.result.totalPage,
-        rankArray: [...result[1].data.result, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        rankArray: [...result[1].data.result, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        boardArray: result[2].data.result,
       }
     }
   } catch (error) {
@@ -121,6 +123,7 @@ export const getServerSideProps = async ({ query }: PageContext): Promise<Server
         initPostArray: [],
         totalPage: 0,
         rankArray: [],
+        boardArray: [],
       }
     }
   }

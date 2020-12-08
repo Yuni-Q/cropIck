@@ -1,6 +1,6 @@
 import Axios from 'axios';
 import { NextPage } from 'next';
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import GNB from '../components/GNB';
@@ -49,11 +49,10 @@ interface ServerSideProps {
 export const getServerSideProps = async (): Promise<ServerSideProps | void> => {
 	try {
 		const result = await Promise.all([
-			Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/ranking`),
-			Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/boards/rank`),
-			Axios.get(`http://ec2-52-79-158-171.ap-northeast-2.compute.amazonaws.com:8080/api/v1/boards`),
+			Axios.get(`https://umzzar.com/api/v1/ranking`),
+			Axios.get(`https://umzzar.com/api/v1/boards/rank`),
+			Axios.get(`https://umzzar.com/api/v1/boards`),
 		])
-		console.log(111, result[2].data);
 		result[0].data.result.sort((a: any, b: any) => {
 			return b.count - a.count;
 		})

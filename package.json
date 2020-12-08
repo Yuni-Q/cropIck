@@ -25,6 +25,7 @@
 		"@types/styled-components": "^5.1.4",
 		"axios": "^0.19.2",
 		"chart.js": "^2.9.4",
+		"chartjs-plugin-datalabels": "^0.7.0",
 		"cookie-parser": "^1.4.5",
 		"cross-env": "^7.0.2",
 		"dayjs": "^1.9.6",
