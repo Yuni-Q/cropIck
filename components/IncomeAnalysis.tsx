@@ -70,7 +70,7 @@ const IncomeAnalysis: React.FC<any> = () => {
   }
   const data2 = {
     // 각 막대별 라벨
-    labels: ['0.4km 미만', '0.4 ~ 0.8', '0.8~1.2', '1.2이상'],
+    labels: ['0.4 미만', '0.4 ~ 0.8', '0.8 ~ 1.2', '1.2 이상'],
     datasets: [
       {
         borderWidth: 1, // 테두리 두께
@@ -147,7 +147,7 @@ const IncomeAnalysis: React.FC<any> = () => {
       </Table>
       <Comment>*10a 기준 *2019 조사 기준 *단위 : 천원</Comment>
       <BarWrapper>
-        <div style={{ width: '40%' }}>
+        <div style={{ width: '40%',height: 400 }}>
           <BarTitle>상위 하위 농가 소득 비교</BarTitle>
           <div style={{ width: '100%', marginTop: 20 }}>
             <Bar
@@ -158,7 +158,7 @@ const IncomeAnalysis: React.FC<any> = () => {
           </div>
 
         </div>
-        <div style={{ width: '40%' }}>
+        <div style={{ width: '40%' ,height: 400}}>
           <BarTitle>규모별 소득</BarTitle>
           <div style={{ width: '100%', marginTop: 20 }}>
             <Bar
@@ -167,7 +167,7 @@ const IncomeAnalysis: React.FC<any> = () => {
               height={300}
             />
           </div>
-
+          <Comment>*10a 기준 *2019 조사 기준 *단위 : ha</Comment>
         </div>
       </BarWrapper>
     </div>

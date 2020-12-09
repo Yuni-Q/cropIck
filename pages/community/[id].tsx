@@ -22,7 +22,6 @@ const Community: React.FC<any> = ({ id, crop, initPostArray, totalPage, post }) 
         console.log(error);
       }
     }
-    console.log(page)
     get();
   }, [page])
 
@@ -35,7 +34,6 @@ const Community: React.FC<any> = ({ id, crop, initPostArray, totalPage, post }) 
         console.log(error);
       }
     }
-    console.log(page)
     get();
   }, [range])
 
